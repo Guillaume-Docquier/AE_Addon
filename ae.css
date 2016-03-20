@@ -1,4 +1,7 @@
-.modifyRank, .modifyRank span {
-  font-weight: bold !important;
-  color: #116611 !important;
+#arrivalDate {
+  font-size: 80%;
+  color: #DDD;
+}
+#arrivalDate span {
+  display: block;
 }

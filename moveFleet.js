@@ -45,6 +45,11 @@ chrome.storage.local.get({arrivalTime:defaultSettings}, function (result)
         if (arrival_server_time) $("#serverDate").text("Server: " + arrivalDate.server);
         if (arrival_local_time) $("#localDate").html("&nbsp&nbspLocal: " + arrivalDate.local);
       }
+      else
+      {
+        $("#serverDate").text("");
+        $("#localDate").text("");
+      }
     }, 1000);
   }
 });

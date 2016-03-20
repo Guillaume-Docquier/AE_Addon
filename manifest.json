@@ -1,0 +1,47 @@
+{
+  "manifest_version": 2,
+  "name": "AstroEmpires add-on",
+  "version": "0.1",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.astroempires.com/*"
+      ],
+      "exclude_matches": [
+        "http://*.astroempires.com/ranks.aspx*",
+        "http://*.astroempires.com/updates.aspx*",
+        "http://*.astroempires.com/terms.aspx*",
+        "http://*.astroempires.com/help.aspx*",
+        "http://*.astroempires.com/faq.aspx*",
+        "http://*.astroempires.com/tutorial.aspx*",
+        "http://*.astroempires.com/tables.aspx*",
+        "http://*.astroempires.com/extras.aspx*",
+        "http://*.astroempires.com/contact.aspx*",
+
+        "http://www.astroempires.com/*",
+        "http://portal.astroempires.com/*",
+        "http://forum.astroempires.com/*"
+      ],
+      "css": ["ae.css"],
+      "js": ["jquery-2.2.1.min.js", "content.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move"
+      ],
+      "css": ["ae.css"],
+      "js": ["jquery-2.2.1.min.js", "moveFleet.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "browser_action": {
+  "default_icon": "logo-white.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+}

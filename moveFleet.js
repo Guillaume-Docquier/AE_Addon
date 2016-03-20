@@ -19,22 +19,31 @@ function addTimeStrings(travelTime, serverTime){
 
 // Say hi
 console.log("moveFleet.js");
+// Retrieve settings
+var arrival_server_time = false;
+var arrival_local_time = false;
+var defaultSettings = {server:arrival_server_time, local:arrival_local_time};
+chrome.storage.local.get({arrivalTime:defaultSettings}, function (result)
+{
+  arrival_server_time = result.arrivalTime.server;
+  arrival_local_time = result.arrivalTime.local;
+});
 // Add fields for arrival date
 $("#move_fleet_form tr").eq(0).append("<th width='20%'>Expected Arrival</th>");
 $("#move_fleet_form tr").eq(1).append("<td id='arrivalDate' align='center'><span id='serverDate'></span><span id='localDate'></span></td>");
-// Update time every second
-setInterval(function()
+// Update time every second if the settings allow it
+if (arrival_server_time || arrival_local_time)
 {
-  //#DEBUG# console.log("Time changed");
-  var duration = $("#duration").text();
-  //#DEBUG# console.log("duration: " + duration);
-  // Convert date/time to proper format only if a travel time was issued
-  if (duration.search(/[\w]/) > -1)
+  setInterval(function()
   {
-    var arrivalDate = addTimeStrings(duration, $("#server-time").text());
-    //#DEBUG# console.log("arrivalDate: " + arrivalDate);
-    // Show date as arrival time
-    $("#serverDate").text("Server: " + arrivalDate.server);
-    $("#localDate").html("&nbsp&nbspLocal: " + arrivalDate.local);
-  }
-}, 1000);
+    var duration = $("#duration").text();//#DEBUG# console.log("duration: " + duration);
+    // Convert date/time to proper format only if a travel time was issued
+    if (duration.search(/[\w]/) > -1)
+    {
+      var arrivalDate = addTimeStrings(duration, $("#server-time").text()); //#DEBUG# console.log("arrivalDate: " + arrivalDate);
+      // Show date as arrival time if the settings allow it
+      if (arrival_server_time) $("#serverDate").text("Server: " + arrivalDate.server);
+      if (arrival_local_time) $("#localDate").html("&nbsp&nbspLocal: " + arrivalDate.local);
+    }
+  }, 1000);
+}

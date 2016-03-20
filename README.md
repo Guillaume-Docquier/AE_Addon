@@ -16,10 +16,15 @@ Integrated battle calc
 Automated tech checking
 
 ### Implemented functionalities  
+You will find an AE_Addon settings section in the display settings that allows you to enable/disable any functionality.
 You can now see the expected arrival time (server time) before launching your fleet. _Requires animated server time_
 You can also see the expected arrival time (local time) before launching your fleet. _Requires animated server time_
 
 ### Version history  
+v0.3
+> **Added**    
+There is now an AE_Addon settings section in the display settings that allows you to check/uncheck server/local arrival times.
+
 v0.2
 > **Modified**    
 You can now see the expected arrival time (**local** time) before launching your fleet. _Requires animated server time_   

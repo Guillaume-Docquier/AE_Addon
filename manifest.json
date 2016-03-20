@@ -2,7 +2,9 @@
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
   "version": "0.1",
-
+  "permissions": [
+      "storage"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -33,6 +35,14 @@
       ],
       "css": ["ae.css"],
       "js": ["jquery-2.2.1.min.js", "moveFleet.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/account.aspx?view=display"
+      ],
+      "css": ["ae.css"],
+      "js": ["jquery-2.2.1.min.js", "displaySettings.js"],
       "run_at": "document_end"
     }
   ],

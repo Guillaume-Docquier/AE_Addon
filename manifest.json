@@ -1,9 +1,11 @@
 {
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
-  "version": "0.1",
+  "version": "0.3",
   "permissions": [
-      "storage"
+      "storage",
+      "notifications",
+      "alarms"
   ],
   "content_scripts": [
     {
@@ -26,7 +28,7 @@
         "http://forum.astroempires.com/*"
       ],
       "css": ["ae.css"],
-      "js": ["jquery-2.2.1.min.js", "content.js"],
+      "js": ["jquery-2.2.1.min.js", "core.js"],
       "run_at": "document_start"
     },
     {

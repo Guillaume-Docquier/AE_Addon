@@ -17,6 +17,11 @@ function addTimeStrings(travelTime, serverTime){
   return {server:serverArrivalDate.toLocaleString('en-US', properFormat), local:localArrivalDate.toLocaleString('en-US', properFormat)};
 }
 
+//test
+var array = ["hi"];
+array[1] = "hello";
+console.log(array);
+
 // Say hi
 console.log("moveFleet.js");
 // Retrieve settings
@@ -27,7 +32,6 @@ chrome.storage.local.get({arrivalTime:defaultSettings}, function (result)
 {
   arrival_server_time = result.arrivalTime.server;
   arrival_local_time = result.arrivalTime.local;
-
   // Update time every second if the settings allow it
   if (arrival_server_time || arrival_local_time)
   {

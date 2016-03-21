@@ -3,13 +3,12 @@
 // travelTime needs to be converted to ms...
 // ...in order to calculate arrival time by adding milliseconds
 function addTimeStrings(travelTime, serverTime){
-  var serverTimeMS = new Date(serverTime).getTime();
   var localTimeMS = Date.now();
+  var serverTimeMS = new Date(serverTime).getTime();
   // Remove spaces && Split between characters
   var travelTimeArray = travelTime.replace(/[\s]/g, '').split(/[\D]/g);  //#DEBUG#  console.log(travelTimeArray);
   travelTimeArray.pop(); // Array ends with an empty cell [h,m,s,'']
-  //#DEBUG#
-  console.log(travelTimeArray);
+  //#DEBUG# console.log(travelTimeArray);
   // Convert h:m:s to ms
   var travelTimeMS = -1;
   switch(travelTimeArray.length)
@@ -27,7 +26,7 @@ function addTimeStrings(travelTime, serverTime){
   // Add milliseconds
   var serverArrivalDate = new Date(serverTimeMS + travelTimeMS);
   var localArrivalDate = new Date(localTimeMS + travelTimeMS);
-
+  // Return in the proper format
   var properFormat = { hour12: false, month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   return {server:serverArrivalDate.toLocaleString('en-US', properFormat), local:localArrivalDate.toLocaleString('en-US', properFormat)};
 }

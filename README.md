@@ -20,7 +20,7 @@ You will find an AE_Addon settings section in the display settings that allows y
 You can now see the expected arrival time (server time) before launching your fleet. _Requires animated server time_  
 You can also see the expected arrival time (local time) before launching your fleet. _Requires animated server time_  
 
-### Version history  
+### Version history (Current version: v0.3.1)  
 v0.3
 > **Added**    
 There is now an AE_Addon settings section in the display settings that allows you to check/uncheck server/local arrival times.

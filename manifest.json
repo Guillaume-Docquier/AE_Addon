@@ -27,7 +27,7 @@
         "http://portal.astroempires.com/*",
         "http://forum.astroempires.com/*"
       ],
-      "css": ["ae.css"],
+      "css": ["core.css"],
       "js": ["jquery-2.2.1.min.js", "core.js"],
       "run_at": "document_start"
     },
@@ -35,15 +35,23 @@
       "matches": [
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move"
       ],
-      "css": ["ae.css"],
+      "css": ["arrivalTimes.css"],
       "js": ["jquery-2.2.1.min.js", "arrivalTimes.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move"
+      ],
+      "css": ["notificationFleetMove.css"],
+      "js": ["jquery-2.2.1.min.js", "notificationFleetMove.js"],
       "run_at": "document_end"
     },
     {
       "matches": [
         "http://*.astroempires.com/account.aspx?view=display"
       ],
-      "css": ["ae.css"],
+      "css": ["displaySettings.css"],
       "js": ["jquery-2.2.1.min.js", "displaySettings.js"],
       "run_at": "document_end"
     }

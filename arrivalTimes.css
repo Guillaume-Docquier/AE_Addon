@@ -1,0 +1,7 @@
+#arrivalDate {
+  font-size: 75%;
+  color: #DDD; /*light grey*/
+}
+#arrivalDate span {
+  display: block;
+}

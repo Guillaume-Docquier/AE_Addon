@@ -36,7 +36,7 @@
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move"
       ],
       "css": ["ae.css"],
-      "js": ["jquery-2.2.1.min.js", "moveFleet.js"],
+      "js": ["jquery-2.2.1.min.js", "arrivalTimes.js"],
       "run_at": "document_end"
     },
     {

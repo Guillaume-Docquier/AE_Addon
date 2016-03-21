@@ -32,7 +32,7 @@ function addTimeStrings(travelTime, serverTime){
 }
 
 // Say hi
-console.log("moveFleet.js");
+console.log("arrivalTimes.js");
 // Retrieve settings
 var arrival_server_time = false;
 var arrival_local_time = false;

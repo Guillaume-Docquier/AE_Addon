@@ -7,8 +7,23 @@ function addTimeStrings(travelTime, serverTime){
   var localTimeMS = Date.now();
   // Remove spaces && Split between characters
   var travelTimeArray = travelTime.replace(/[\s]/g, '').split(/[\D]/g);  //#DEBUG#  console.log(travelTimeArray);
+  travelTimeArray.pop(); // Array ends with an empty cell [h,m,s,'']
+  //#DEBUG#
+  console.log(travelTimeArray);
   // Convert h:m:s to ms
-  var travelTimeMS = ((((parseInt(travelTimeArray[0]) * 60) + parseInt(travelTimeArray[1])) * 60) + parseInt(travelTimeArray[2])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
+  var travelTimeMS = -1;
+  switch(travelTimeArray.length)
+  {
+    case 3:
+      travelTimeMS = ((((parseInt(travelTimeArray[0]) * 60) + parseInt(travelTimeArray[1])) * 60) + parseInt(travelTimeArray[2])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
+      break;
+    case 2:
+      travelTimeMS = (((parseInt(travelTimeArray[0])) * 60) + parseInt(travelTimeArray[1])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
+      break;
+    case 1:
+      travelTimeMS = (parseInt(travelTimeArray[0])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
+      break;
+  }
   // Add milliseconds
   var serverArrivalDate = new Date(serverTimeMS + travelTimeMS);
   var localArrivalDate = new Date(localTimeMS + travelTimeMS);
@@ -16,11 +31,6 @@ function addTimeStrings(travelTime, serverTime){
   var properFormat = { hour12: false, month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   return {server:serverArrivalDate.toLocaleString('en-US', properFormat), local:localArrivalDate.toLocaleString('en-US', properFormat)};
 }
-
-//test
-var array = ["hi"];
-array[1] = "hello";
-console.log(array);
 
 // Say hi
 console.log("moveFleet.js");

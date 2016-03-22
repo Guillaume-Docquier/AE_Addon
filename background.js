@@ -19,38 +19,37 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
 
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
-  // Send a message to the active tab
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    var activeTab = tabs[0];
-    chrome.tabs.sendMessage(activeTab.id, {message: "clicked_browser_action"});
-  });
+    sendMessage({message: "clicked_browser_action"});
 });
 
 // Create a notification
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    case "new_fleet_notification":
-      // Create all we need for setting up the notification in the future
-      requestTitle = "A fleet has landed";
-      requestMessage = request.fleetName + " has landed at " + request.fleetLocation + ". \nFleet size: " + request.fleetSize + ".";
-      var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage}};
-      // Find first empty spot in array (might be the end)
-      var i;
-      for(i = 0; i < notificationList.length; i++)
-      {
-        if (notificationList[i] == "") break;
-      }
-      notificationList[i] = notification;
-      sendMessage({message: "creating_alarm", id:i});
-      // Set up an alarm with name being its notificationList index
-      chrome.alarms.create(i.toString(), {delayInMinutes:request.notificationDelay});
-      sendMessage({message: "alarm_created", id:i});
-      break;
-    case "get_url":
-      chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-        var url = tabs[0].url;
-        sendResponse(url);
-      });
-      return true;
+    switch(request.message)
+    {
+      case "new_fleet_notification":
+        // Create all we need for setting up the notification in the future
+        requestTitle = "A fleet has landed";
+        requestMessage = request.fleetName + " has landed at " + request.fleetDestination + ". \nFleet size: " + request.fleetSize + ".";
+        var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage}};
+        // Find first empty spot in array (might be the end)
+        var i;
+        for(i = 0; i < notificationList.length; i++)
+        {
+          if (notificationList[i] == "") break;
+        }
+        notificationList[i] = notification;
+        sendMessage({message: "creating_alarm", id:i});
+        // Set up an alarm with name being its notificationList index
+        chrome.alarms.create(i.toString(), {when:request.notificationDate});
+        sendMessage({message: "alarm_created", id:i});
+        break;
+      case "get_url":
+        chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+          var url = tabs[0].url;
+          sendResponse(url);
+        });
+        return true;
+    }
   }
 );

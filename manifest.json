@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
-  "version": "0.3.2",
+  "version": "0.4",
   "permissions": [
       "storage",
       "notifications",
@@ -34,23 +34,18 @@
     },
     {
       "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move"
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move*"
       ],
-      "css": ["arrivalTimes.css"],
-      "js": ["jquery-2.2.1.min.js", "arrivalTimes.js"],
+      "exclude_matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
+      ],
+      "css": ["arrivalTimes.css", "notificationFleetMove.css"],
+      "js": ["jquery-2.2.1.min.js", "arrivalTimes.js", "notificationFleetMove.js"],
       "run_at": "document_end"
     },
     {
       "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move"
-      ],
-      "css": ["notificationFleetMove.css"],
-      "js": ["jquery-2.2.1.min.js", "notificationFleetMove.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start"
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
       ],
       "js": ["jquery-2.2.1.min.js", "notificationFleetDeparted.js"],
       "run_at": "document_end"

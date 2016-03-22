@@ -3,7 +3,6 @@ This is a chrome extension for Astroempires that adds functionalities to the gam
 If you happen to have ideas in mind, feel free to propose them!
 ### Expected functionalities
 Choose to be notified when  
-* fleet lands in x sec
 * building queued, building finished
 * tech q/f
 * prod f
@@ -19,8 +18,13 @@ Automated tech checking
 You will find an AE_Addon settings section in the display settings that allows you to enable/disable any functionality.  
 You can now see the expected arrival time (server time) before launching your fleet. _Requires animated server time_  
 You can also see the expected arrival time (local time) before launching your fleet. _Requires animated server time_  
+You can now choose to be notified before a fleet lands when moving it.  
 
-### Version history (Current version: v0.3.1)  
+### Version history (Current version: v0.4)  
+v0.4
+> **Added**    
+You can now choose to be notified x seconds before a fleet lands when moving it.  
+
 v0.3
 > **Added**    
 There is now an AE_Addon settings section in the display settings that allows you to check/uncheck server/local arrival times.

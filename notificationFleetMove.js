@@ -10,19 +10,12 @@ function convertToMs(durationString) {
   {
     case 3:
       durationMs += parseInt(durationArray.pop()) * 360000;
-      //durationSec = (((parseInt(durationArray[0]) * 60) + parseInt(durationArray[1])) * 60) + parseInt(durationArray[2]);  //#DEBUG#  console.log(travelTimeMS);
-      //break;
     case 2:
       durationMs += parseInt(durationArray.pop()) * 60000;
-      //durationSec = ((parseInt(durationArray[0])) * 60) + parseInt(durationArray[1]);  //#DEBUG#  console.log(travelTimeMS);
-      //break;
     case 1:
       durationMs += parseInt(durationArray.pop()) * 1000;
-      //durationSec = parseInt(durationArray[0]);  //#DEBUG#  console.log(travelTimeMS);
-      //break;
   }
-  //#DEBUG#
-  console.log("durationMs: " + durationMs);
+  //#DEBUG#  console.log("durationMs: " + durationMs);
   return durationMs;
 }
 
@@ -40,19 +33,17 @@ notificationCheckbox.change(function() {
   var delaySecString = notificationDelay.val();
   if (notificationCheckbox.prop('checked'))
   {
-    console.log("Checked!");
     var newUrl = moveStartUrl + "&notificationDelay=" + delaySecString;
     $("#move_fleet_form").attr('action', newUrl);
   }
   else
   {
-    console.log("Unchecked!");
     $("#move_fleet_form").attr('action', moveStartUrl);
   }
 });
 // Upon clicking move, prevent leaving the page before the notification is created
-moveButton.click(function(event){
-    /*event.preventDefault(); //#DEBUG# console.log("Prevented!");*/
+/*moveButton.click(function(event){
+    /*event.preventDefault(); //#DEBUG# console.log("Prevented!");*//*
 
     // Nothing to do if notification not enabled
     if (!notificationCheckbox.prop('checked')) return;
@@ -63,15 +54,14 @@ moveButton.click(function(event){
     chrome.storage.local.get("pendingNotifications", function (result)
     {
       if (result[0] === undefined) result = [];
-      result.push({fleetId:"", fleetName:"", fleetLocation:destination, fleetSize:totalSize, notificationDelay:delayMS}); //#DEBUG#
-      console.log("result: " + result[0].fleetSize);
+      result.push({fleetId:"", fleetName:"", fleetLocation:destination, fleetSize:totalSize, notificationDate:delayMS}); //#DEBUG# console.log("result: " + result[0].fleetSize);
       /*chrome.storage.local.set({"pendingNotifications": result}, function()
       {
         console.log('Settings saved');
         // The page can now proceed normally
         // The notification will be created on the next page
-      });*/
+      });*//*
     });
     // Tell the background to create the notification
     //chrome.runtime.sendMessage({message: "new_fleet_notification", fleetId:"43",fleetName:"S.H.I.E.L.D. 43",fleetLocation:"Earth(L00:11:22:33)",fleetSize:"43,000",notificationDelay:delay});
-  });
+  });*/

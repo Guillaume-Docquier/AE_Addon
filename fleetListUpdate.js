@@ -12,6 +12,6 @@ for (var i = 0; i < fleets.length; i++)
 }
 chrome.storage.local.set({fleetList: fleetArray}, function()
 {
-  console.log("Stringify: " + JSON.stringify(fleetArray));
-  console.log("Saved: " + fleetArray);
+  //console.log("Stringify: " + JSON.stringify(fleetArray));
+  //console.log("Saved: " + fleetArray);
 });

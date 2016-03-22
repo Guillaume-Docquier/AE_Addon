@@ -1,48 +1,75 @@
 // background.js
-var notificationList = [];
+
 // Sends a message
 function sendMessage(message)
 {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+  {
     var activeTab = tabs[0];
     chrome.tabs.sendMessage(activeTab.id, message);
   });
 }
 // Alarm listener
-chrome.alarms.onAlarm.addListener(function(alarm) {
-  var notification = notificationList[parseInt(alarm.name)];
-  chrome.notifications.create(notification.notificationId, notification.notificationOptions, function(Id){
-    sendMessage({message: "notification_created", id:Id});
+chrome.alarms.onAlarm.addListener(function(alarm)
+{
+  // Alarm fired, get the notification options
+  chrome.storage.local.get("notificationList", function(result)
+  {
+    var notification = result.notificationList[parseInt(alarm.name)];
+    // Create the notification
+    chrome.notifications.create(notification.notificationId, notification.notificationOptions, function(Id)
+    {
+      sendMessage({message: "notification_created", id:Id}); //#DEBUG#
+    });
+    // Remove this notification from the list
+    result.notificationList[alarm.name] = "";
+    chrome.storage.local.set({notificationList:result.notificationList});
   });
-  notificationList[alarm.name] = "";
 });
 
 // Called when the user clicks on the browser action.
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(function(tab)
+{
     sendMessage({message: "clicked_browser_action"});
 });
 
-// Create a notification
+// Message listener
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
+  function(request, sender, sendResponse)
+  {
     switch(request.message)
     {
       case "new_fleet_notification":
+        // Object as {message, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
         // Create all we need for setting up the notification in the future
-        requestTitle = "A fleet has landed";
-        requestMessage = request.fleetName + " has landed at " + request.fleetDestination + ". \nFleet size: " + request.fleetSize + ".";
-        var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage}};
-        // Find first empty spot in array (might be the end)
-        var i;
-        for(i = 0; i < notificationList.length; i++)
-        {
-          if (notificationList[i] == "") break;
-        }
-        notificationList[i] = notification;
-        sendMessage({message: "creating_alarm", id:i});
-        // Set up an alarm with name being its notificationList index
-        chrome.alarms.create(i.toString(), {when:request.notificationDate});
-        sendMessage({message: "alarm_created", id:i});
+        var requestTitle = "New fleet notification";
+        var requestMessage = request.fleetName + " has just landed.";
+        if (request.notificationDelay > 0) requestMessage = request.fleetName + " will land in " + request.notificationDelay + " seconds.";
+        var requestContextMessage = "Fleet size: " + request.fleetSize;
+        // NotificationOptions object
+        var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage, contextMessage:requestContextMessage}};
+        // Retrieve the list of notifications
+        chrome.storage.local.get("notificationList", function(result){
+          // Find first empty spot in the notificationList (might be the end)
+          var i = 0;
+          if (result.notificationList != undefined)
+          {
+            for(; i < result.notificationList.length; i++)
+            {
+              if (result.notificationList[i] == "") break;
+            }
+          }
+          else result.notificationList = [];
+          // Fill it with the new notification. We will use the index as alarm name
+          result.notificationList[i] = notification;
+          // Set up an alarm for the notification
+          sendMessage({message: "creating_alarm", id:i}); //#DEBUG#
+          var timeUp = request.notificationDate - 2000; // Remove some time to compensate for script response time
+          chrome.alarms.create(i.toString(), {when:timeUp});
+          sendMessage({message: "alarm_created", id:i}); //#DEBUG#
+          // Save the notificationList
+          chrome.storage.local.set({notificationList:result.notificationList})
+        });
         break;
       case "get_url":
         chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {

@@ -11,9 +11,9 @@ chrome.runtime.onMessage.addListener(
     switch(request.message)
     {
     case "clicked_browser_action":
-      var delay = 5/60; //5 sec in minutes
-      console.log("time: " + delay + " minutes.");
-      chrome.runtime.sendMessage({message:"new_fleet_notification", fleetId:"43",fleetName:"S.H.I.E.L.D. 43",fleetLocation:"Earth(L00:11:22:33)",fleetSize:"43,000",notificationDate:delay});
+      var delay = Date.now()+5000; // 5 seconds from now
+      console.log("time: " + delay);
+      chrome.runtime.sendMessage({message:"new_fleet_notification", fleetId:"43",fleetName:"S.H.I.E.L.D. 43",fleetLocation:"Earth(L00:11:22:33)",fleetSize:"43,000",notificationDate:delay,notificationDelay:"0"});
       break;
     case "notification_created":
       console.log("Notification created. Id: " + request.id);

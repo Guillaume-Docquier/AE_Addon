@@ -22,12 +22,9 @@ function convertToMs(durationString) {
 // If unchecked, put back the default url
 function changeFormAction(checked, defaultUrl, delay)
 {
-  if(checked)
-  {
-    var newUrl = defaultUrl + "&notificationDelay=" + delay;
-    $("#move_fleet_form").attr('action', newUrl);
-  }
-  else $("#move_fleet_form").attr('action', defaultUrl);;
+  if(checked) var newUrl = defaultUrl + "&notificationDelay=" + delay;
+  else var newUrl = defaultUrl + "&notificationDelay=-1";
+  $("#move_fleet_form").attr('action', newUrl);
 }
 // Say hi
 console.log("notificationFleetMove.js");

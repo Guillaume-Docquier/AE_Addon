@@ -41,27 +41,3 @@ notificationCheckbox.change(function() {
     $("#move_fleet_form").attr('action', moveStartUrl);
   }
 });
-// Upon clicking move, prevent leaving the page before the notification is created
-/*moveButton.click(function(event){
-    /*event.preventDefault(); //#DEBUG# console.log("Prevented!");*//*
-
-    // Nothing to do if notification not enabled
-    if (!notificationCheckbox.prop('checked')) return;
-    // Save all info regarding the fleet except fleetId and fleetName
-    var delayMS = convertToMs($("#duration").text()) - parseInt(notificationDelay.val()) * 1000;
-    var totalSize = $("#totalsize").text();
-    var destination = $("#destination").val();
-    chrome.storage.local.get("pendingNotifications", function (result)
-    {
-      if (result[0] === undefined) result = [];
-      result.push({fleetId:"", fleetName:"", fleetLocation:destination, fleetSize:totalSize, notificationDate:delayMS}); //#DEBUG# console.log("result: " + result[0].fleetSize);
-      /*chrome.storage.local.set({"pendingNotifications": result}, function()
-      {
-        console.log('Settings saved');
-        // The page can now proceed normally
-        // The notification will be created on the next page
-      });*//*
-    });
-    // Tell the background to create the notification
-    //chrome.runtime.sendMessage({message: "new_fleet_notification", fleetId:"43",fleetName:"S.H.I.E.L.D. 43",fleetLocation:"Earth(L00:11:22:33)",fleetSize:"43,000",notificationDelay:delay});
-  });*/

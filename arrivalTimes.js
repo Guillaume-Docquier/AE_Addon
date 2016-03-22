@@ -8,20 +8,18 @@ function addTimeStrings(travelTime, serverTime){
   // Remove spaces && Split between characters
   var travelTimeArray = travelTime.replace(/[\s]/g, '').split(/[\D]/g);  //#DEBUG#  console.log(travelTimeArray);
   travelTimeArray.pop(); // Array ends with an empty cell [h,m,s,'']
-  //#DEBUG# console.log(travelTimeArray);
-  // Convert h:m:s to ms
-  var travelTimeMS = -1;
+  travelTimeArray.reverse(); // New format [s,m,h]
+  //#DEBUG# console.log(durationArray);
+  // Convert [s,m,h] to ms
+  var travelTimeMS = 0;
   switch(travelTimeArray.length)
   {
     case 3:
-      travelTimeMS = ((((parseInt(travelTimeArray[0]) * 60) + parseInt(travelTimeArray[1])) * 60) + parseInt(travelTimeArray[2])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
-      break;
+      travelTimeMS += parseInt(travelTimeArray.pop()) * 360000;
     case 2:
-      travelTimeMS = (((parseInt(travelTimeArray[0])) * 60) + parseInt(travelTimeArray[1])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
-      break;
+      travelTimeMS += parseInt(travelTimeArray.pop()) * 60000;
     case 1:
-      travelTimeMS = (parseInt(travelTimeArray[0])) * 1000;  //#DEBUG#  console.log(travelTimeMS);
-      break;
+      travelTimeMS += parseInt(travelTimeArray.pop()) * 1000;
   }
   // Add milliseconds
   var serverArrivalDate = new Date(serverTimeMS + travelTimeMS);

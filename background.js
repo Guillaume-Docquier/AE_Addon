@@ -1,6 +1,12 @@
-// background.js
+//++ ==================================== background ===================================== ++//
+//++                                                                                       ++//
+//-- The background script is an event page that receives messages from content scripts.   --//
+//-- It can create fleet notifications.                                                    --//
+//++                                                                                       ++//
+//++ ===================================================================================== ++//
 
-// Sends a message
+//=Sends a message
+// @message is the message to be sent
 function sendMessage(message)
 {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
@@ -10,6 +16,7 @@ function sendMessage(message)
   });
 }
 // Alarm listener
+// Currently only used for fleet notifications
 chrome.alarms.onAlarm.addListener(function(alarm)
 {
   // Alarm fired, get the notification options
@@ -34,6 +41,8 @@ chrome.browserAction.onClicked.addListener(function(tab)
 });
 
 // Message listener
+// #new_fleet_notification creates a new fleet notification
+// #get_url sends back the page url
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse)
   {

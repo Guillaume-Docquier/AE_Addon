@@ -1,8 +1,13 @@
-//arrivalTime:{server:true/false, local:true/false}
+//++ ================================== displaySettings ================================== ++//
+//++                                                                                       ++//
+//-- This script is fired on http://*.astroempires.com/account.aspx?view=display           --//
+//-- This is the display settings page. The script adds an interface to allow the user to  --//
+//-- manage the addon settings, such as the display of the fleet arrival time.             --//
+//++                                                                                       ++//
+//++ ===================================================================================== ++//
 
 // Say hi
 console.log('displaySettings.js');
-
 // Add a table for our settings
 var settingsTableRow = $('table.layout tr').eq(0);//#DEBUG# console.log(settingsTableRow);
 var settingsCell = settingsTableRow.children().eq(-1);

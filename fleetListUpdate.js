@@ -1,3 +1,11 @@
+//++ ================================== fleetListUpdate ================================== ++//
+//++                                                                                       ++//
+//-- This script is fired on http://*.astroempires.com/fleet.aspx. It gathers all fleets   --//
+//-- and stores them in storage.local.fleetList. This is useful when determining if a new  --//
+//-- fleet was created upon launching one.                                                 --//
+//++                                                                                       ++//
+//++ ===================================================================================== ++//
+
 // Say hi
 console.log("fleetListUpdate.js");
 // Find all the fleets and store them
@@ -10,8 +18,5 @@ for (var i = 0; i < fleets.length; i++)
   var fleetId = fleetUrl.substring(fleetUrl.search(/[\d]/), fleetUrl.length); //#DEBUG# console.log("fleetId: " + fleetId);
   fleetArray.push(fleetId);
 }
-chrome.storage.local.set({fleetList: fleetArray}, function()
-{
-  //console.log("Stringify: " + JSON.stringify(fleetArray));
-  //console.log("Saved: " + fleetArray);
-});
+chrome.storage.local.set({fleetList: fleetArray});
+//  , function(){console.log("Saved: " + fleetArray);});

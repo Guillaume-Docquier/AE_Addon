@@ -1,7 +1,19 @@
-// Returns an object containing the serverTime + travelTime and localTime + travelTime in a proper format
-// serverTime requires no manipulation because its format is handled by Date()
-// travelTime needs to be converted to ms...
-// ...in order to calculate arrival time by adding milliseconds
+//++ ==================================== arrivalTimes =================================== ++//
+//++                                                                                       ++//
+//-- This script is fired on http://*.astroempires.com/fleet.aspx?fleet=*&view=move*       --//
+//-- This is the fleet launching page. The script adds an interface to allow the user to   --//
+//-- see the expected arrival time of its fleet before launching them. Settings are saved  --//
+//-- in storage.local.arrivalTime. The default values (false) can be modified at any time  --//
+//-- in the display settings under the AE_Addon section.                                   --//
+//++                                                                                       ++//
+//++ ===================================================================================== ++//
+
+
+//=Performs travelTime+serverTime and travelTime+LocalTime
+// @travelTime is the flight duration (format: xh ym zs)
+// @serverTime is the serverTime retrieved from the page (format: 2016/03/22 23:17:48)
+// These parameter have different formats, we must convert them to
+// milliseconds to add them and convert them into a display format.
 function addTimeStrings(travelTime, serverTime){
   var localTimeMS = Date.now();
   var serverTimeMS = new Date(serverTime).getTime();

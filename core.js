@@ -1,18 +1,25 @@
-// =================================== READ =================================== //
-// https://developer.chrome.com/extensions/content_scripts
-// ============================================================================ //
+//++ ======================================== core ======================================= ++//
+//++                                                                                       ++//
+//-- This script is fired on all pages. It currently only receives messages for debugging  --//
+//-- the notification system.                                                              --//
+//++                                                                                       ++//
+//++ ===================================================================================== ++//
 
 // Say hi
 console.log("core.js");
 
-// Create a notification
+//=Listen to incoming messages
+// #clicked_browser_action currently creates a fake notification
+// #notification_created serves for debugging notifications
+// #creating_alarm serves for debugging notifications
+// #alarm_created serves for debugging notifications
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     switch(request.message)
     {
     case "clicked_browser_action":
       var delay = Date.now()+5000; // 5 seconds from now
-      console.log("time: " + delay);
+      //#DEBUG# console.log("5 seconds...");
       chrome.runtime.sendMessage({message:"new_fleet_notification", fleetId:"43",fleetName:"S.H.I.E.L.D. 43",fleetLocation:"Earth(L00:11:22:33)",fleetSize:"43,000",notificationDate:delay,notificationDelay:"0"});
       break;
     case "notification_created":
@@ -28,7 +35,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-// Replace rank by rank tier
+/*// Replace rank by rank tier
 function changeRank(totalPlayers) {
   var rankObject = $("#top-header_menu .button-normal a").eq(0);
   // Find current rank
@@ -70,3 +77,4 @@ rankReq.responseType = 'document';
 rankReq.addEventListener("load", getToLastRankPage);
 rankReq.open("GET", "http://lyra.astroempires.com/ranks.aspx");
 rankReq.send();
+*/

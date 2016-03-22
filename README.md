@@ -20,7 +20,7 @@ You can now see the expected arrival time (server time) before launching your fl
 You can also see the expected arrival time (local time) before launching your fleet. _Requires animated server time_  
 You can now choose to be notified before a fleet lands when moving it.  
 
-### Version history (Current version: v0.4)  
+### Version history (Current version: v0.4.1)  
 v0.4
 > **Added**    
 You can now choose to be notified x seconds before a fleet lands when moving it.  

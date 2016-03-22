@@ -18,7 +18,17 @@ function convertToMs(durationString) {
   //#DEBUG#  console.log("durationMs: " + durationMs);
   return durationMs;
 }
-
+// If checked, append the url with the delay
+// If unchecked, put back the default url
+function changeFormAction(checked, defaultUrl, delay)
+{
+  if(checked)
+  {
+    var newUrl = defaultUrl + "&notificationDelay=" + delay;
+    $("#move_fleet_form").attr('action', newUrl);
+  }
+  else $("#move_fleet_form").attr('action', defaultUrl);;
+}
 // Say hi
 console.log("notificationFleetMove.js");
 // Add a checkbox to enable notifications
@@ -28,16 +38,14 @@ var moveButton = $("#move_fleet_form center input").eq(-1);
 var notificationCheckbox = $("#notificationFleetMove");
 var notificationDelay = $("#notificationOffSet");
 var moveStartUrl = $("#move_fleet_form").attr('action');
+
 // Change url when ticking the box
 notificationCheckbox.change(function() {
   var delaySecString = notificationDelay.val();
-  if (notificationCheckbox.prop('checked'))
-  {
-    var newUrl = moveStartUrl + "&notificationDelay=" + delaySecString;
-    $("#move_fleet_form").attr('action', newUrl);
-  }
-  else
-  {
-    $("#move_fleet_form").attr('action', moveStartUrl);
-  }
+  changeFormAction(notificationCheckbox.prop('checked'), moveStartUrl, delaySecString);
+});
+// Change url when the time value is changed
+notificationDelay.change(function() {
+  var delaySecString = notificationDelay.val();
+  changeFormAction(notificationCheckbox.prop('checked'), moveStartUrl, delaySecString);
 });

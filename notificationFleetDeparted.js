@@ -38,6 +38,7 @@ chrome.runtime.sendMessage({message: "get_url"}, function(url)
         // Store it
         // Tell the background to create the notification
         chrome.runtime.sendMessage({message:"new_fleet_notification", fleetId:Id,fleetName:name,fleetDestination:destination,fleetSize:size,notificationDate:date});
+        // Add the fleet to the fleetList
         return;
       };
       //

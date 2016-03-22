@@ -1,17 +1,14 @@
+/* Vertically align checkbox */
+#notificationFleetMove {
+  position: relative;
+  margin: 0 5px 0 5px;
+  top: 2px;
+}
 #notify {
+  position: relative;
   margin: 5px 0 5px 0;
 }
+/* ------------------------ */
 #notificationOffSet {
   width: 15px;
 }
-/*#notificationFleetMove, label {
-    float: left !important;
-    line-height: 1.6em !important;
-    height: 1.6em !important;
-    margin: 0px 2px !important;
-    padding: 0px !important;
-    font-size: inherit !important;
-}
-#notificationFleetMove {
-    clear: left !important;
-}*/

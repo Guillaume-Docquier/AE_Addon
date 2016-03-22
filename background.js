@@ -1,5 +1,6 @@
 // background.js
 var notificationList = [];
+// Sends a message
 function sendMessage(message)
 {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -28,7 +29,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 // Create a notification
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if( request.message === "new_fleet_notification" ) {
+    case "new_fleet_notification":
       // Create all we need for setting up the notification in the future
       requestTitle = "A fleet has landed";
       requestMessage = request.fleetName + " has landed at " + request.fleetLocation + ". \nFleet size: " + request.fleetSize + ".";
@@ -44,6 +45,12 @@ chrome.runtime.onMessage.addListener(
       // Set up an alarm with name being its notificationList index
       chrome.alarms.create(i.toString(), {delayInMinutes:request.notificationDelay});
       sendMessage({message: "alarm_created", id:i});
-    }
+      break;
+    case "get_url":
+      chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        var url = tabs[0].url;
+        sendResponse(url);
+      });
+      return true;
   }
 );

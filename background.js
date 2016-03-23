@@ -74,6 +74,7 @@ chrome.runtime.onMessage.addListener(
           // Set up an alarm for the notification
           sendMessage({message: "creating_alarm", id:i}); //#DEBUG#
           var timeUp = request.notificationDate - 2000; // Remove some time to compensate for script response time
+          console.log("timeUp: " + timeUp);
           chrome.alarms.create(i.toString(), {when:timeUp});
           sendMessage({message: "alarm_created", id:i}); //#DEBUG#
           // Save the notificationList

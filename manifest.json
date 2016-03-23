@@ -59,6 +59,13 @@
     },
     {
       "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&action=rename"
+      ],
+      "js": ["jquery-2.2.1.min.js", "notificationUpdateRename.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
         "http://*.astroempires.com/account.aspx?view=display"
       ],
       "css": ["displaySettings.css"],
@@ -68,7 +75,7 @@
   ],
 
   "browser_action": {
-  "default_icon": "logo-white.png"
+    "default_icon": "logo-white.png"
   },
 
   "background": {

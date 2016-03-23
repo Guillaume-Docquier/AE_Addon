@@ -17,9 +17,8 @@
 function addTimeStrings(travelTime, serverTime){
   var localTimeMS = Date.now();
   var serverTimeMS = new Date(serverTime).getTime();
-  // Remove spaces && Split between characters
-  var travelTimeArray = travelTime.replace(/[\s]/g, '').split(/[\D]/g);  //#DEBUG#  console.log(travelTimeArray);
-  travelTimeArray.pop(); // Array ends with an empty cell [h,m,s,'']
+  // Only keep numbers
+  var travelTimeArray = travelTime.match(/\d+/g);//#DEBUG# console.log(travelTimeArray);
   travelTimeArray.reverse(); // New format [s,m,h]
   //#DEBUG# console.log(durationArray);
   // Convert [s,m,h] to ms

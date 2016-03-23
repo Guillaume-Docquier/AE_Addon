@@ -9,29 +9,6 @@
 //++                                                                                       ++//
 //++ ===================================================================================== ++//
 
-//=Converts time as xh ym zs to milliseconds.
-// @durationString duration as xh ym zs to be converted
-function convertToMs(durationString) {
-  // Remove spaces && Split between characters
-  var durationArray = durationString.replace(/[\s]/g, '').split(/[\D]/g);  //#DEBUG#  console.log(travelTimeArray);
-  durationArray.pop(); // Array ends with an empty cell [h,m,s,'']
-  durationArray.reverse(); // New format [s,m,h]
-  //#DEBUG# console.log(durationArray);
-  // Convert [s,m,h] to ms
-  var durationMs = 0;
-  switch(durationArray.length)
-  {
-    case 3:
-      durationMs += parseInt(durationArray.pop()) * 360000;
-    case 2:
-      durationMs += parseInt(durationArray.pop()) * 60000;
-    case 1:
-      durationMs += parseInt(durationArray.pop()) * 1000;
-  }
-  //#DEBUG#  console.log("durationMs: " + durationMs);
-  return durationMs;
-}
-
 //=If checked, append the url with the delay
 // If unchecked, append the url with delay = -1
 function changeFormAction()

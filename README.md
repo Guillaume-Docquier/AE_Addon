@@ -19,7 +19,7 @@ You will find an AE_Addon settings section in the display settings that allows y
 You can now see the expected arrival time (server/local time) before launching your fleet. _Requires animated server time_  
 You can now choose to be notified before a fleet lands when moving it.  
 
-### Version history (Current version: v0.4.3)  
+### Version history (Current version: v0.4.4)  
 v0.4
 > **Added**    
 You can now choose to be notified x seconds before a fleet lands when moving it.  

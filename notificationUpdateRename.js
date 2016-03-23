@@ -17,8 +17,9 @@ if (renameForm.attr('action') != undefined)
   var fleetId = renameForm.attr('action').match(/\d+/).pop();//#DEBUG#
   console.log("fleetId: " + fleetId + ", " + typeof fleetId);
   // Submit button listener
-  $(".input-button", renameForm).click(function()
+  $(".input-button", renameForm).click(function(event)
   {
+    //event.preventDefault();
     // Find if needs to be notified
     chrome.storage.local.get('notificationList', function(result)
     {
@@ -36,15 +37,17 @@ if (renameForm.attr('action') != undefined)
       if (indexOfFleetId == -1) return;
 
       console.log("Proceed.");
-      // Gather new fleet name
-      var fleetName = $(".input-text", renameForm).eq(0).val() + " " + $(".input-text", renameForm).eq(1).val(); //#DEBUG#
-      console.log("fleetName: " + fleetName);
-      //var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage, contextMessage:requestContextMessage}};
-      var message = result.notificationList[indexOfFleetId].notificationOptions.message; //#DEBUG#
-      console.log("message: " + message);
-      result.notificationList[indexOfFleetId].notificationOptions.message = fleetName + " " + message.match(/has.+|will.+/);//#DEBUG#
-      console.log("newMessage: " + result.notificationList[indexOfFleetId].notificationOptions.message);
-      //chrome.storage.local.set({notificationList:result.notificationList});
+      // Gather new fleet name. For the number, discard leading 0s
+      var fleetNumber = $(".input-text", renameForm).eq(1).val().match(/0*(\d+)?/).pop();
+      if (fleetNumber == undefined) fleetNumber = '';
+      var fleetName = $(".input-text", renameForm).eq(0).val() + " " + fleetNumber; //#DEBUG#      console.log("fleetName: " + fleetName);
+      // Edit the notification message
+      var message = result.notificationList[indexOfFleetId].notificationOptions.message; //#DEBUG#      console.log("message: " + message);
+      result.notificationList[indexOfFleetId].notificationOptions.message = fleetName + " " + message.match(/has.+|will.+/);//#DEBUG# console.log("newMessage: " + result.notificationList[indexOfFleetId].notificationOptions.message);
+      // Save the modifications
+      chrome.storage.local.set({notificationList:result.notificationList}, function(){
+        console.log("Fleet name modified.");
+      });
     });
   });
 }

@@ -52,8 +52,9 @@ chrome.runtime.onMessage.addListener(
         // Object as {message, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
         // Create all we need for setting up the notification in the future
         var requestTitle = "New fleet notification";
-        var requestMessage = request.fleetName + " has just landed.";
-        if (request.notificationDelay > 0) requestMessage = request.fleetName + " will land in " + request.notificationDelay + " seconds.";
+        var requestMessage = request.fleetName + " will land in " + request.notificationDelay + " seconds.";
+        if (request.notificationDelay == 1) requestMessage = request.fleetName + " will land in 1 second.";
+        else if (request.notificationDelay == 0) requestMessage = request.fleetName + " has just landed.";
         var requestContextMessage = "Fleet size: " + request.fleetSize;
         // NotificationOptions object
         var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage, contextMessage:requestContextMessage}};

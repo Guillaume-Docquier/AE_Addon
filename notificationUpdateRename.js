@@ -35,14 +35,15 @@ if (renameForm.attr('action') != undefined)
       // Nothing to do if fleetId not in the list
       if (indexOfFleetId == -1) return;
 
+      console.log("Proceed.");
       // Gather new fleet name
       var fleetName = $(".input-text", renameForm).eq(0).val() + " " + $(".input-text", renameForm).eq(1).val(); //#DEBUG#
       console.log("fleetName: " + fleetName);
       //var notification = {notificationId:request.fleetId, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage, contextMessage:requestContextMessage}};
       var message = result.notificationList[indexOfFleetId].notificationOptions.message; //#DEBUG#
       console.log("message: " + message);
-      var newMessage = fleetName + " " + message.match(/^(has.+|will.+)/);//#DEBUG#
-      console.log("newMessage: " + newMessage);
+      result.notificationList[indexOfFleetId].notificationOptions.message = fleetName + " " + message.match(/has.+|will.+/);//#DEBUG#
+      console.log("newMessage: " + result.notificationList[indexOfFleetId].notificationOptions.message);
       //chrome.storage.local.set({notificationList:result.notificationList});
     });
   });

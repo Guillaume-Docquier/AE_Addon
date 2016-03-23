@@ -82,8 +82,8 @@ chrome.runtime.onMessage.addListener(
         });
         break;
       case "get_url":
-        chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-          var url = tabs[0].url;
+        chrome.tabs.get(sender.tab.id, function (tab) {
+          var url = tab.url;
           sendResponse(url);
         });
         return true;

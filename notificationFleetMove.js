@@ -27,7 +27,7 @@ console.log("notificationFleetMove.js");
 var defaultUrl = $("#move_fleet_form").attr('action');
 changeFormAction();
 // Add a checkbox to enable notifications
-$("#move_fleet_form center").prepend("<div id='notify'><input type='checkbox' name='be_notified' id='notificationFleetMove' class='notification'><label for='notificationFleetMove'>Be notified <input type='text' id='notificationOffSet' class='input-numeric notification' value='0'> seconds before landing</label></div>");
+$("#move_fleet_form center").prepend("<div id='notify'><input type='checkbox' name='be_notified' id='notificationFleetMove' class='notification'><label for='notificationFleetMove'>Be notified <input type='text' id='notificationOffSet' class='input-numeric notification' value='5'> seconds before landing</label></div>");
 // Change &notificationDelay when ticking the checkbox or when the delay value is changed
 $(".notification").change(function() {
   changeFormAction();

@@ -6,6 +6,8 @@
 //++                                                                                       ++//
 //++ ===================================================================================== ++//
 
+// - default value for fleet notification delay
+
 // Say hi
 console.log('displaySettings.js');
 // Add a table for our settings

@@ -15,17 +15,13 @@
 // @date is the time snapshotted when the page loaded. Necessary for precision.
 function createNotification(Id, notificationDelayMs, fleetRow, date)
 {
-  console.log("dateBefore: " + date);
   // Gather fleet info
   var name = $("td", fleetRow).eq(0).text(); //#DEBUG#  console.log("name: " + name);
   var destination = $("td", fleetRow).eq(2).text(); //#DEBUG#  console.log("destination: " + destination);
-  var durationMs = parseInt($("td", fleetRow).eq(3).attr('title')) * 1000; //#DEBUG#
-  console.log("durationMs: " + durationMs);
-  date += (durationMs - notificationDelayMs); //#DEBUG#
-  console.log("dateAfter: " + date);
+  var durationMs = parseInt($("td", fleetRow).eq(3).attr('title')) * 1000; //#DEBUG#  console.log("durationMs: " + durationMs);
+  date += (durationMs - notificationDelayMs); //#DEBUG#  console.log("dateAfter: " + date);
   var size = $("td", fleetRow).eq(4).text(); //#DEBUG#  console.log("size: " + size);
-  var delay = notificationDelayMs/1000;//#DEBUG#
-  console.log("delay: " + delay);
+  var delay = notificationDelayMs/1000;//#DEBUG#  console.log("delay: " + delay);
   // Tell the background to create the notification
   chrome.runtime.sendMessage({message:"new_fleet_notification", fleetId:Id,fleetName:name,fleetDestination:destination,fleetSize:size,notificationDate:date,notificationDelay:delay});
 }
@@ -37,11 +33,9 @@ var date = Date.now();
 chrome.runtime.sendMessage({message: "get_url"}, function(url)
 {
   // Url is like: fleet.aspx?fleet=8834620&view=move_start&notificationDelay=5, we want the id and notification
-  var urlNumbers = url.match(/\d+/g); //#DEBUG# console.log("urlNumbers: " + urlNumbers);
-  var notificationDelayMs = urlNumbers.pop() * 1000; //#DEBUG#
-  console.log("notificationDelayMs: " + notificationDelayMs);
-  var currentFleetId = urlNumbers.pop();//#DEBUG#
-  console.log("currentFleetId: " + currentFleetId);
+  var urlNumbers = url.match(/-?\d+/g); //#DEBUG# console.log("urlNumbers: " + urlNumbers);
+  var notificationDelayMs = urlNumbers.pop() * 1000; //#DEBUG#  console.log("notificationDelayMs: " + notificationDelayMs);
+  var currentFleetId = urlNumbers.pop();//#DEBUG#  console.log("currentFleetId: " + currentFleetId);
   // Find the new fleet
   chrome.storage.local.get("fleetList", function(result)
   {
@@ -57,9 +51,7 @@ chrome.runtime.sendMessage({message: "get_url"}, function(url)
       // This will be useful if a notification is set for a fleet that is not new
       if (currentFleetId == Id) currentFleetRow = fleetRow;
       // Search the fleetList
-      var indexOfFleetId = result.fleetList.indexOf(Id); //#DEBUG#
-      console.log("FleetId: " + Id + ", indexOfFleetId: " + indexOfFleetId);
-      console.log("typeOfFleetId: " + typeof Id + ", typeOfindexOfFleetId: " + typeof indexOfFleetId);
+      var indexOfFleetId = result.fleetList.indexOf(Id); //#DEBUG#      console.log("FleetId: " + Id + ", indexOfFleetId: " + indexOfFleetId);      console.log("typeOfFleetId: " + typeof Id + ", typeOfindexOfFleetId: " + typeof indexOfFleetId);
       // Not found: this is a new fleet
       if (indexOfFleetId < 0)
       {

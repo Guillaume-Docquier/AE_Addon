@@ -1,13 +1,20 @@
 //++ ======================================== core ======================================= ++//
 //++                                                                                       ++//
-//-- This script is fired on all pages. It currently only receives messages for debugging  --//
-//-- the notification system.                                                              --//
+//-- This script is fired on all pages. It receives messages for debugging and also does   --//
+//-- some initializations if the user just logged in.                                      --//                                                            --//
 //++                                                                                       ++//
 //++ ===================================================================================== ++//
 
 // Say hi
 console.log("core.js");
-
+// Verify if we just logged in
+chrome.storage.local.get("justLoggedIn", function(result)
+{
+  if (result.justLoggedIn == false) return;
+  console.log("Just logged in.");
+  // Do any init you need
+  chrome.storage.local.set({justLoggedIn:false});
+});
 //=Listen to incoming messages
 // #clicked_browser_action currently creates a fake notification
 // #notification_created serves for debugging notifications

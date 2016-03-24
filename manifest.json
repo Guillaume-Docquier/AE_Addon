@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "permissions": [
       "storage",
       "notifications",
@@ -23,6 +23,9 @@
         "http://*.astroempires.com/tables.aspx*",
         "http://*.astroempires.com/extras.aspx*",
         "http://*.astroempires.com/contact.aspx*",
+
+        "http://*.astroempires.com/home.aspx*",
+        "http://*.astroempires.com/login.aspx*",
 
         "http://www.astroempires.com/*",
         "http://portal.astroempires.com/*",
@@ -71,6 +74,14 @@
       "css": ["displaySettings.css"],
       "js": ["jquery-2.2.1.min.js", "displaySettings.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/login.aspx*",
+        "http://*.astroempires.com/home.aspx*"
+      ],
+      "js": ["jquery-2.2.1.min.js", "login.js"],
+      "run_at": "document_end"
     }
   ],
 
@@ -79,6 +90,7 @@
   },
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   }
 }

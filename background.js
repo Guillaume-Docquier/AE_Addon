@@ -15,6 +15,10 @@ function sendMessage(message)
     chrome.tabs.sendMessage(activeTab.id, message);
   });
 }
+
+// Say hi
+console.log("background.js");
+
 // Alarm listener
 // Currently only used for fleet notifications
 chrome.alarms.onAlarm.addListener(function(alarm)

@@ -12,8 +12,10 @@ chrome.storage.local.get("justLoggedIn", function(result)
 {
   if (result.justLoggedIn == false) return;
   console.log("Just logged in.");
-  // Do any init you need
   chrome.storage.local.set({justLoggedIn:false});
+  // Do any init you need
+  chrome.runtime.sendMessage({message:"init"});
+  // Update fleet list (can the background do it?)
 });
 //=Listen to incoming messages
 // #clicked_browser_action currently creates a fake notification

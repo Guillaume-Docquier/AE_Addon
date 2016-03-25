@@ -15,9 +15,12 @@ function sendMessage(message)
     chrome.tabs.sendMessage(activeTab.id, message);
   });
 }
+
 //=Finds all fleets in the DOM and saves them in strage.local.fleetList
+// Called upon receiving xmlHTTPrequest response
 // @no-arguments
-function fleetListUpdate () {
+function fleetListUpdate ()
+{
   console.log("init - Updating fleetList")
   var fleetPageDOM = this.response;
   // Find all the fleets and store them
@@ -32,6 +35,17 @@ function fleetListUpdate () {
   chrome.storage.local.set({fleetList: fleetArray}, function(){console.log("init - fleetList updated");});
 }
 
+//=Prints an array to the console
+// @array the array to be printed
+function printArray(array)
+{
+  if(array.length == 0) console.log("empty");
+  for(var i = 0; i < array.length; i++)
+  {
+    console.log(array[i]);
+  }
+}
+
 // Say hi
 console.log("background.js");
 
@@ -43,14 +57,12 @@ chrome.alarms.onAlarm.addListener(function(alarm)
   // Alarm fired, get the notification options
   chrome.storage.local.get("notificationList", function(result)
   {
+    // Name of the alarm was used as index
     var notification = result.notificationList[parseInt(alarm.name)];
     // Create the notification
-    chrome.notifications.create(notification.notificationId, notification.notificationOptions, function(Id)
-    {
-      sendMessage({message: "notification_created", id:Id}); //#DEBUG#
-    });
+    chrome.notifications.create(notification.notificationId, notification.notificationOptions);
     // Remove this notification from the list
-    result.notificationList[alarm.name] = "";
+    result.notificationList[parseInt(alarm.name)] = "";
     chrome.storage.local.set({notificationList:result.notificationList});
   });
 });
@@ -58,12 +70,34 @@ chrome.alarms.onAlarm.addListener(function(alarm)
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab)
 {
-    sendMessage({message: "clicked_browser_action"});
+  // Display content of all variables stored
+  console.log("===== AE_Addon status ======")
+  chrome.storage.local.get("notificationList", function(result)
+  {
+    console.log("## notificationList: ");
+    printArray(result.notificationList);
+    // Next one
+    chrome.storage.local.get("fleetList", function(result)
+    {
+      console.log("## fleetList: ");
+      printArray(result.fleetList);
+      // Next one
+      chrome.storage.local.get("arrivalTime", function(result)
+      {
+        console.log("## arrivalTime: ");
+        console.log("server = " + result.arrivalTime.server);
+        console.log("local = " + result.arrivalTime.local);
+        // Done
+        console.log("===== AE_Addon status done ======");
+      });
+    });
+  });
 });
 
 // Message listener
 // #new_fleet_notification creates a new fleet notification
 // #get_url sends back the page url
+// #init proceeds with initializations
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse)
   {

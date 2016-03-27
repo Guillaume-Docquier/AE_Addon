@@ -1,15 +1,15 @@
 /* Vertically align checkbox */
-#notificationFleetMove {
+.notificationCheckbox {
   position: relative;
   margin: 0 5px 0 5px;
   top: 2px;
 }
-#notify {
+.notify {
   position: relative;
   margin: 5px 0 5px 0;
 }
 /* ------------------------ */
-#notificationOffSet {
+.notificationInput {
   width: 19px;
   padding-left: 4px;
 }

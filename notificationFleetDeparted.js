@@ -23,14 +23,14 @@ function createNotification(Id, notificationDelayMs, fleetRow, date)
   var size = $("td", fleetRow).eq(4).text(); //#DEBUG#  console.log("size: " + size);
   var delay = notificationDelayMs/1000;//#DEBUG#  console.log("delay: " + delay);
   // Tell the background to create the notification
-  chrome.runtime.sendMessage({message:"new_fleet_notification", fleetId:Id,fleetName:name,fleetDestination:destination,fleetSize:size,notificationDate:date,notificationDelay:delay});
+  chrome.runtime.sendMessage({type:"new_fleet_notification", fleetId:Id,fleetName:name,fleetDestination:destination,fleetSize:size,notificationDate:date,notificationDelay:delay});
 }
 
 // Say hi
 console.log("notificationFleetDeparted.js");
 var date = Date.now();
 // Get page url
-chrome.runtime.sendMessage({message: "get_url"}, function(url)
+chrome.runtime.sendMessage({type: "get_url"}, function(url)
 {
   // Url is like: fleet.aspx?fleet=8834620&view=move_start&notificationDelay=5, we want the id and notification
   var urlNumbers = url.match(/-?\d+/g); //#DEBUG# console.log("urlNumbers: " + urlNumbers);

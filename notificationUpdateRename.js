@@ -27,7 +27,7 @@ if (renameForm.attr('action') != undefined)
       var indexOfFleetId = -1;
       for (var i = 0; i < result.notificationList.length; i++)
       {
-        if (result.notificationList[i].notificationId == fleetId)
+        if (result.notificationList[i].fleetId == fleetId)
         {
           indexOfFleetId = i;
           break;

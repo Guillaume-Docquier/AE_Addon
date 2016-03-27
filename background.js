@@ -46,6 +46,20 @@ function printArray(array)
   }
 }
 
+function createFleetNotification(notification)
+{
+  // Create all we need for setting up the notification in the future
+  var title = "New fleet notification";
+  console.log(title);
+  // Message depends on the delay
+  var message = notification.fleetName + " will land in " + notification.notificationDelay + " seconds.";
+  if (notification.notificationDelay == 1) message = notification.fleetName + " will land in 1 second.";
+  else if (notification.notificationDelay == 0) message = notification.fleetName + " has just landed.";
+  var contextMessage = "Fleet size: " + notification.fleetSize;
+  var notificationOptions = {type:'basic', iconUrl:'logo-white.png', title:title, message:message, contextMessage:contextMessage}
+  chrome.notifications.create(notification.fleetId, notificationOptions);
+}
+
 // Say hi
 console.log("background.js");
 
@@ -59,11 +73,16 @@ chrome.alarms.onAlarm.addListener(function(alarm)
   {
     // Name of the alarm was used as index
     var notification = result.notificationList[parseInt(alarm.name)];
-    // Create the notification
-    chrome.notifications.create(notification.notificationId, notification.notificationOptions);
-    // Remove this notification from the list
-    result.notificationList[parseInt(alarm.name)] = "";
-    chrome.storage.local.set({notificationList:result.notificationList});
+    // Determine the type of notification
+    switch(notification.type)
+    {
+      case "new_fleet_notification":
+        createFleetNotification(notification);
+        // Remove this notification from the list
+        result.notificationList[parseInt(alarm.name)] = "";
+        chrome.storage.local.set({notificationList:result.notificationList});
+        break;
+    }
   });
 });
 
@@ -96,24 +115,17 @@ chrome.browserAction.onClicked.addListener(function(tab)
 
 // Message listener
 // #new_fleet_notification creates a new fleet notification
+// #update_fleet_notification updates an ongoing alarm
 // #get_url sends back the page url
 // #init proceeds with initializations
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse)
   {
-    switch(request.message)
+    switch(request.type)
     {
       case "new_fleet_notification":
-        // Object as {message, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
-        // Create all we need for setting up the notification in the future
-        var requestTitle = "New fleet notification";
-        var requestMessage = request.fleetName + " will land in " + request.notificationDelay + " seconds.";
-        if (request.notificationDelay == 1) requestMessage = request.fleetName + " will land in 1 second.";
-        else if (request.notificationDelay == 0) requestMessage = request.fleetName + " has just landed.";
-        var requestContextMessage = "Fleet size: " + request.fleetSize;
-        var date = request.notificationDate - 2000; // Remove some time to compensate for script response time
-        // NotificationOptions object
-        var notification = {notificationId:request.fleetId, notificationDate:date, notificationOptions:{type:'basic', iconUrl:'logo-white.png', title:requestTitle, message:requestMessage, contextMessage:requestContextMessage}};
+        // Object as {type, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
+        request.notificationDate -= 2000; // Remove some time to compensate for script response time
         // Retrieve the list of notifications
         chrome.storage.local.get("notificationList", function(result){
           // Find first empty spot in the notificationList (might be the end)
@@ -127,14 +139,27 @@ chrome.runtime.onMessage.addListener(
           }
           else result.notificationList = [];
           // Fill it with the new notification. We will use the index as alarm name
-          result.notificationList[i] = notification;
+          result.notificationList[i] = request;
           // Set up an alarm for the notification
-          console.log("timeUp: " + date);
-          chrome.alarms.create(i.toString(), {when:date}); //#DEBUG#
+          chrome.alarms.create(i.toString(), {when:request.notificationDate}); //#DEBUG#
           console.log("Alarm set.")
           // Save the notificationList
           chrome.storage.local.set({notificationList:result.notificationList})
         });
+        break;
+      case "update_fleet_notification":
+        // Overwrite existing alarm
+        request.notificationDate -= 2000; // Remove some time to compensate for script response time
+        chrome.alarms.create(request.alarmName, {when:request.notificationDate});
+        // Update notificationList
+        chrome.storage.local.get("notificationList", function(result)
+        {
+          var alarmName = parseInt(request.alarmName);
+          delete request.alarmName;
+          request.type = "new_fleet_notification";
+          result.notificationList[alarmName] = request;
+          chrome.storage.local.set({notificationList:result.notificationList}, function(){console.log("Updated notification.");});
+        })
         break;
       case "get_url":
         chrome.tabs.get(sender.tab.id, function (tab) {
@@ -144,7 +169,7 @@ chrome.runtime.onMessage.addListener(
         return true;
       case "init": // Reset alarms and check fleets?
         console.log("init - Updating notificationList");
-        chrome.alarms.clear(); // Clear alarms
+        chrome.alarms.clearAll(); // Clear alarms
         chrome.storage.local.get("notificationList", function(result){
           // We'll clean up the notification list
           var newNotificationList = [];

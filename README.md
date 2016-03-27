@@ -17,9 +17,13 @@ Automated tech checking
 ### Implemented functionalities  
 You will find an AE_Addon settings section in the display settings that allows you to enable/disable any functionality.  
 You can now see the expected arrival time (server/local time) before launching your fleet. _Requires animated server time_  
-You can now choose to be notified before a fleet lands when moving it.  
+You can now choose to be notified before a fleet lands when moving/recalling it.  
 
-### Version history (Current version: v0.4.6)  
+### Version history (Current version: v0.4.7)  
+v0.4.7
+> **Modified**    
+You can now choose to be notified x seconds before a fleet lands when **recalling** it.  
+
 v0.4
 > **Added**    
 You can now choose to be notified x seconds before a fleet lands when moving it.  

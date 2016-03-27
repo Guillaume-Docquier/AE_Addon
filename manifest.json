@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "permissions": [
       "storage",
       "notifications",
@@ -37,6 +37,13 @@
     },
     {
       "matches": [
+        "http://*.astroempires.com/fleet.aspx"
+      ],
+      "js": ["jquery-2.2.1.min.js", "fleetListUpdate.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move*"
       ],
       "exclude_matches": [
@@ -55,9 +62,21 @@
     },
     {
       "matches": [
-        "http://*.astroempires.com/fleet.aspx"
+        "http://*.astroempires.com/fleet.aspx?fleet=*"
       ],
-      "js": ["jquery-2.2.1.min.js", "fleetListUpdate.js"],
+      "exclude_matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move*",
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
+      ],
+      "css": ["notificationFleetMove.css"],
+      "js": ["jquery-2.2.1.min.js", "notificationUiRecall.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&action=recall&notificationDelay=*"
+      ],
+      "js": ["jquery-2.2.1.min.js", "notificationUpdateRecall.js"],
       "run_at": "document_end"
     },
     {

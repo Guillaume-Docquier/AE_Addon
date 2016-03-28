@@ -6,10 +6,16 @@
 }
 .notify {
   position: relative;
-  margin: 5px 0 5px 0;
+  margin: 5px;
 }
 /* ------------------------ */
 .notificationInput {
   width: 19px;
   padding-left: 4px;
+}
+.notificationWrap .box3_content{
+  text-align: center !important;
+}
+.notificationWrap{
+  min-width: 391px !important;
 }

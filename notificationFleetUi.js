@@ -16,7 +16,7 @@ function changeFormAction()
   // Change urls
   if(checked) var newUrl = defaultUrl + "&notificationDelay=" + delay;
   else var newUrl = defaultUrl + "&notificationDelay=-1";
-  $("center form").attr('action', newUrl);
+  $("form").eq(-1).attr('action', newUrl);
 }
 
 // Say hi
@@ -25,30 +25,14 @@ console.log("notificationUiRecall.js");
 if($("#timer1").length)
 {
   console.log("Fleet is moving");
-  // Add UI for notification on recall
-  if ($("center form").length)
-  {
-    var form = $("center form");
-    var defaultUrl = form.attr("action"); //#DEBUG#    console.log("defaultUrl: " + defaultUrl);
-    changeFormAction();
-    // Add the actual UI
-    form.append("<div id='recallNotification' class='notify' style='display:none;'><input type='checkbox' name='be_notified' id='notificationFleetRecall' class='notificationCheckbox notification'><label for='notificationFleetRecall'>Upon recalling, be notified <input type='text' id='notificationOffSetRecall' class='input-numeric notificationInput notification' value='5'> seconds before landing</label></div>");
-    // Show the notification on recall UI
-    $(".input-checkbox", form).change(function()
-    {
-      $("#recallNotification").toggle();
-    });
-    // Change action url
-    $(".notification", form).change(function()
-    {
-      changeFormAction();
-    });
-  }
   // Add UI to inform of current notification status
+  var travelTimeText = $("center").eq(1).text();
+  var sections = $("#background-content").children();
+  sections.eq(5).remove();sections.eq(6).remove();
+  $("#background-content").append("<table class='box-complex box box-compact box3 notificationWrap'> <tbody> <tr> <td> <table class='box3_box-header box-header'> <tbody> <tr> <td class='box3_box-header-left box-header-left'>&nbsp;</td><td class='box3_box-header-center box-header-center'>&nbsp;</td><td class='box3_box-header-right box-header-right'>&nbsp;</td></tr></tbody> </table> </td></tr><tr> <td> <table class='box3_box-content box-content'> <tbody> <tr> <td class='box3_box-content-left box-content-left'>&nbsp;</td><td class='box3_box-content-center box-content-center'> <div class='box3_content'> <b>" + travelTimeText + "</b> <br><div id='currentNotification' class='notify'>You will not be notified when this fleet lands</div></div></td><td class='box3_box-content-right box-content-right'>&nbsp;</td></tr></tbody> </table> </td></tr><tr> <td> <table class='box3_box-footer box-footer'> <tbody> <tr> <td class='box3_box-footer-left box-footer-left'>&nbsp;</td><td class='box3_box-footer-center box-footer-center'>&nbsp;</td><td class='box3_box-footer-right box-footer-right'>&nbsp;</td></tr></tbody> </table> </td></tr></tbody></table>");
+  // Update the notificationStatus inside the new UI
   chrome.runtime.sendMessage({type: "get_url"}, function(url)
   {
-    // Default notificationStatus
-    $("center").eq(1).append("<div id='currentNotification' class='notify'>You will not be notified when this fleet lands</div>");
     // Url is like: fleet.aspx?fleet=10258182&action=recall&notificationDelay=2, we want the id and notification if it's there
     var urlNumbers = url.match(/-?\d+/g);
     // Means notificationDelay was set
@@ -75,4 +59,73 @@ if($("#timer1").length)
       });
     }
   });
+  // Add UI for notification on recall
+  if ($("center form").length)
+  {
+    // Save the form HTML and remove it. We will place it somewhere else
+    var formHtml = sections.eq(8).html();
+    sections.eq(7).remove();sections.eq(8).remove();
+    // Add the actual UI
+    $("#background-content").append("<table class='box-complex box box-compact box3 notificationWrap'> <tbody> <tr> <td> <table class='box3_box-header box-header'> <tbody> <tr> <td class='box3_box-header-left box-header-left'>&nbsp;</td><td class='box3_box-header-center box-header-center'>&nbsp;</td><td class='box3_box-header-right box-header-right'>&nbsp;</td></tr></tbody> </table> </td></tr><tr> <td> <table class='box3_box-content box-content'> <tbody> <tr> <td class='box3_box-content-left box-content-left'>&nbsp;</td><td class='box3_box-content-center box-content-center'> <div class='box3_content'> <div id='recallNotification' class='notify'><input type='checkbox' name='be_notified' id='notificationFleetRecall' class='notificationCheckbox notification'><label for='notificationFleetRecall'>Upon recalling, be notified <input type='text' id='notificationOffSetRecall' class='input-numeric notificationInput notification' value='5'> seconds before landing</label></div>" + formHtml + " </div></td><td class='box3_box-content-right box-content-right'>&nbsp;</td></tr></tbody> </table> </td></tr><tr> <td> <table class='box3_box-footer box-footer'> <tbody> <tr> <td class='box3_box-footer-left box-footer-left'>&nbsp;</td><td class='box3_box-footer-center box-footer-center'>&nbsp;</td><td class='box3_box-footer-right box-footer-right'>&nbsp;</td></tr></tbody> </table> </td></tr></tbody></table>");
+    // Update the form
+    var form = $("form").eq(-1);
+    var defaultUrl = form.attr("action"); //#DEBUG#    console.log("defaultUrl: " + defaultUrl);
+    changeFormAction();
+    // Change action url when user changes notification values
+    $("#recallNotification .notification").change(function()
+    {
+      changeFormAction();
+    });
+  }
 }
+
+/*
+<table class='box-complex box box-compact box3 notificationWrap'>
+    <tbody>
+        <tr>
+            <td>
+                <table class='box3_box-header box-header'>
+                    <tbody>
+                        <tr>
+                            <td class='box3_box-header-left box-header-left'>&nbsp;</td>
+                            <td class='box3_box-header-center box-header-center'>&nbsp;</td>
+                            <td class='box3_box-header-right box-header-right'>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class='box3_box-content box-content'>
+                    <tbody>
+                        <tr>
+                            <td class='box3_box-content-left box-content-left'>&nbsp;</td>
+                            <td class='box3_box-content-center box-content-center'>
+                                <div class='box3_content'>
+                                    <div id='recallNotification' class='notify'><input type='checkbox' name='be_notified' id='notificationFleetRecall' class='notificationCheckbox notification'><label for='notificationFleetRecall'>Upon recalling, be notified <input type='text' id='notificationOffSetRecall' class='input-numeric notificationInput notification' value='5'> seconds before landing</label></div>
+                                    " + formHtml + "
+                                </div>
+                            </td>
+                            <td class='box3_box-content-right box-content-right'>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class='box3_box-footer box-footer'>
+                    <tbody>
+                        <tr>
+                            <td class='box3_box-footer-left box-footer-left'>&nbsp;</td>
+                            <td class='box3_box-footer-center box-footer-center'>&nbsp;</td>
+                            <td class='box3_box-footer-right box-footer-right'>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+*/

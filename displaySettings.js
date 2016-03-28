@@ -37,9 +37,9 @@ $(".arrival_time").change(function() {
     console.log('Settings saved: ' + setting);
   });
 });
-/*<table class='box-complex box box-compact box4'>
+/*<table class='box-complex box box-compact box4' id='displaySettings'>
     <tbody>
-          <tr>//Table header
+        <tr>
             <td>
                 <table class='box4_box-header box-header'>
                     <tbody>
@@ -52,7 +52,7 @@ $(".arrival_time").change(function() {
                 </table>
             </td>
         </tr>
-        <tr>//Table body
+        <tr>
             <td>
                 <table class='box4_box-content box-content'>
                     <tbody>
@@ -61,10 +61,10 @@ $(".arrival_time").change(function() {
                             <td class='box4_box-content-center box-content-center'>
                                 <h3>AE_Addon options</h3>
                                 <div class='box4_content'>
-                                      <input type='checkbox' name='arrival_server_time' checked='checked'> Display arrival server time.
-                                      <br>
-                                      <input type='checkbox' name='arrival_local_time' checked='checked'> Display arrival local time.
-                                      <br>
+                                    <input type='checkbox' name='arrival_server_time' class='arrival_time' id='arrival_server_time'> Display arrival server time.
+                                    <br>
+                                    <input type='checkbox' name='arrival_local_time' class='arrival_time' id='arrival_local_time'> Display arrival local time.
+                                    <br>
                                 </div>
                             </td>
                             <td class='box4_box-content-right box-content-right'>&nbsp;</td>
@@ -73,7 +73,7 @@ $(".arrival_time").change(function() {
                 </table>
             </td>
         </tr>
-        <tr>//Table footer
+        <tr>
             <td>
                 <table class='box4_box-footer box-footer'>
                     <tbody>

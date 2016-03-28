@@ -22,25 +22,29 @@ function changeFormAction()
 // Say hi
 console.log("notificationUiRecall.js");
 // Nothing to do if the fleet is not moving
-if ($("center form").length)
+if($("#timer1").length)
 {
   console.log("Fleet is moving");
-  var form = $("center form");
-  var defaultUrl = form.attr("action"); //#DEBUG#    console.log("defaultUrl: " + defaultUrl);
-  changeFormAction();
   // Add UI for notification on recall
-  form.append("<div id='recallNotification' class='notify' style='display:none;'><input type='checkbox' name='be_notified' id='notificationFleetRecall' class='notificationCheckbox notification'><label for='notificationFleetRecall'>Upon recalling, be notified <input type='text' id='notificationOffSetRecall' class='input-numeric notificationInput notification' value='5'> seconds before landing</label></div>");
-  // Show the notification on recall UI
-  $(".input-checkbox", form).change(function()
+  if ($("center form").length)
   {
-    $("#recallNotification").toggle();
-  });
-  // Change action url
-  $(".notification", form).change(function()
-  {
-    console.log("Changed");
+    var form = $("center form");
+    var defaultUrl = form.attr("action"); //#DEBUG#    console.log("defaultUrl: " + defaultUrl);
     changeFormAction();
-  });
+    // Add the actual UI
+    form.append("<div id='recallNotification' class='notify' style='display:none;'><input type='checkbox' name='be_notified' id='notificationFleetRecall' class='notificationCheckbox notification'><label for='notificationFleetRecall'>Upon recalling, be notified <input type='text' id='notificationOffSetRecall' class='input-numeric notificationInput notification' value='5'> seconds before landing</label></div>");
+    // Show the notification on recall UI
+    $(".input-checkbox", form).change(function()
+    {
+      $("#recallNotification").toggle();
+    });
+    // Change action url
+    $(".notification", form).change(function()
+    {
+      console.log("Changed");
+      changeFormAction();
+    });
+  }
   // Add UI to inform of current notification status
   chrome.storage.local.get("notificationList", function(result)
   {

@@ -49,15 +49,15 @@
       "exclude_matches": [
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
       ],
-      "css": ["arrivalTimes.css", "notificationFleetMove.css"],
-      "js": ["jquery-2.2.1.min.js", "arrivalTimes.js", "notificationFleetMove.js"],
+      "css": ["arrivalTimes.css", "notificationUi.css"],
+      "js": ["jquery-2.2.1.min.js", "arrivalTimes.js", "notificationMoveUi.js"],
       "run_at": "document_end"
     },
     {
       "matches": [
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
       ],
-      "js": ["jquery-2.2.1.min.js", "notificationFleetDeparted.js"],
+      "js": ["jquery-2.2.1.min.js", "notificationUpdateMove.js"],
       "run_at": "document_end"
     },
     {
@@ -68,8 +68,8 @@
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move*",
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
       ],
-      "css": ["notificationFleetMove.css"],
-      "js": ["jquery-2.2.1.min.js", "notificationUiRecall.js"],
+      "css": ["notificationUi.css"],
+      "js": ["jquery-2.2.1.min.js", "notificationFleetUi.js"],
       "run_at": "document_end"
     },
     {

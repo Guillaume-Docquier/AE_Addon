@@ -8,7 +8,16 @@
       "alarms",
       "tabs"
   ],
+  
   "content_scripts": [
+    {
+      "matches": [
+        "http://*.astroempires.com/login.aspx*",
+        "http://*.astroempires.com/home.aspx*"
+      ],
+      "js": ["jquery-2.2.1.min.js", "login.js"],
+      "run_at": "document_end"
+    },
     {
       "matches": [
         "http://*.astroempires.com/*"
@@ -37,6 +46,27 @@
     },
     {
       "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&action=recall&notificationDelay=*"
+      ],
+      "js": ["jquery-2.2.1.min.js", "notificationUpdateRecall.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&action=rename"
+      ],
+      "js": ["jquery-2.2.1.min.js", "notificationUpdateRename.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
+      ],
+      "js": ["jquery-2.2.1.min.js", "notificationUpdateMove.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
         "http://*.astroempires.com/fleet.aspx"
       ],
       "js": ["jquery-2.2.1.min.js", "fleetListUpdate.js"],
@@ -55,13 +85,6 @@
     },
     {
       "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
-      ],
-      "js": ["jquery-2.2.1.min.js", "notificationUpdateMove.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": [
         "http://*.astroempires.com/fleet.aspx?fleet=*"
       ],
       "exclude_matches": [
@@ -74,32 +97,10 @@
     },
     {
       "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&action=recall&notificationDelay=*"
-      ],
-      "js": ["jquery-2.2.1.min.js", "notificationUpdateRecall.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&action=rename"
-      ],
-      "js": ["jquery-2.2.1.min.js", "notificationUpdateRename.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": [
         "http://*.astroempires.com/account.aspx?view=display"
       ],
       "css": ["displaySettings.css"],
       "js": ["jquery-2.2.1.min.js", "displaySettings.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": [
-        "http://*.astroempires.com/login.aspx*",
-        "http://*.astroempires.com/home.aspx*"
-      ],
-      "js": ["jquery-2.2.1.min.js", "login.js"],
       "run_at": "document_end"
     }
   ],

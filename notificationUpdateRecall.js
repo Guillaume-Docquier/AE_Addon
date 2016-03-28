@@ -45,6 +45,7 @@ chrome.runtime.sendMessage({type: "get_url"}, function(url)
           updatedNotification.alarmName = i.toString();
           // Update the notifications
           chrome.runtime.sendMessage(updatedNotification);
+          console.log("Fleet notification updated at: " + Date.now());
         }
         break;
       }

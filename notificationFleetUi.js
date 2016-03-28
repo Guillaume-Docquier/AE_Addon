@@ -41,26 +41,38 @@ if($("#timer1").length)
     // Change action url
     $(".notification", form).change(function()
     {
-      console.log("Changed");
       changeFormAction();
     });
   }
   // Add UI to inform of current notification status
-  chrome.storage.local.get("notificationList", function(result)
+  chrome.runtime.sendMessage({type: "get_url"}, function(url)
   {
-    var fleetId = defaultUrl.match(/\d+/).pop(); //#DEBUG#
-    console.log("fleetId: " + fleetId);
-    var notificationStatus = "<div class='notify'>You will not be notified when this fleet lands</div>";
-    for(var i = 0; i < result.notificationList.length; i++)
-    {//#DEBUG#
-      console.log("result.notificationList["+ i + "].fleetId: " + result.notificationList[i].fleetId);
-      if(result.notificationList[i].fleetId == fleetId)
-      {
-        console.log("Found!");
-        notificationStatus = "<div class='notify'>You will be notified " + result.notificationList[i].notificationDelay + " seconds before this fleet lands</div>";
-        break;
-      }
+    // Default notificationStatus
+    $("center").eq(1).append("<div id='currentNotification' class='notify'>You will not be notified when this fleet lands</div>");
+    // Url is like: fleet.aspx?fleet=10258182&action=recall&notificationDelay=2, we want the id and notification if it's there
+    var urlNumbers = url.match(/-?\d+/g);
+    // Means notificationDelay was set
+    if(urlNumbers.length == 2)
+    {
+      var notificationDelay = urlNumbers.pop(); //#DEBUG#      console.log("notificationDelay: " + notificationDelay);
+      if(notificationDelay > -1) $("#currentNotification").text("You will be notified " + notificationDelay + " seconds before this fleet lands");
     }
-    $("center").eq(1).append(notificationStatus);
+    var currentFleetId = urlNumbers.pop();//#DEBUG#    console.log("currentFleetId: " + currentFleetId);
+
+    // If notificationDelay wasn't found, search the chrome.storage.notificationList
+    if(notificationDelay == undefined)
+    {
+      chrome.storage.local.get("notificationList", function(result)
+      {
+        for(var i = 0; i < result.notificationList.length; i++)
+        {
+          if(result.notificationList[i].fleetId == currentFleetId)
+          {
+            $("#currentNotification").text("You will be notified " + result.notificationList[i].notificationDelay + " seconds before this fleet lands");
+            break;
+          }
+        }
+      });
+    }
   });
 }

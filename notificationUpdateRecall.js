@@ -26,22 +26,31 @@ chrome.runtime.sendMessage({type: "get_url"}, function(url)
     var i = 0;
     for(; i < result.notificationList.length; i++)
     {
+      // Found
       if(result.notificationList[i].fleetId == currentFleetId)
       {
-        updateNotification = result.notificationList[i]
-        // Change some values
-        updateNotification.type = "update_fleet_notification";
-        updateNotification.notificationDelay = notificationDelay;
-        updateNotification.fleetDestination = destination;
-        updateNotification.notificationDate = date + travelTimeMs - notificationDelayMs;
-        updateNotification.alarmName = i.toString();
-        // Update the notifications
-        chrome.runtime.sendMessage(updateNotification);
+        // If notification wasn't set, delete the notification
+        if(notificationDelay == -1)
+        {
+          chrome.runtime.sendMessage({type:"delete_fleet_notification", alarmName: i.toString()});
+        }
+        else
+        {
+          updatedNotification = result.notificationList[i];
+          // Change some values
+          updatedNotification.type = "update_fleet_notification";
+          updatedNotification.notificationDelay = notificationDelay;
+          updatedNotification.fleetDestination = destination;
+          updatedNotification.notificationDate = date + travelTimeMs - notificationDelayMs;
+          updatedNotification.alarmName = i.toString();
+          // Update the notifications
+          chrome.runtime.sendMessage(updatedNotification);
+        }
         break;
       }
     }
-    // Create a notification if it didn't exist
-    if(i == result.notificationList.length)
+    // Create a notification if it didn't exist already
+    if(i == result.notificationList.length && notificationDelay != -1)
     {
       var fleetName = $( "option:selected" ).text().match(/\s(.+)\s-/).pop();//#DEBUG#      console.log("fleetName: " + fleetName);
       var fleetSize = $(".box3_content center").text().match(/\d+/).pop();//#DEBUG#      console.log("fleetSize: " + fleetSize);

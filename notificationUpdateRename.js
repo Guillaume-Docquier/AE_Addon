@@ -41,9 +41,8 @@ if (renameForm.attr('action') != undefined)
       var fleetNumber = $(".input-text", renameForm).eq(1).val().match(/0*(\d+)?/).pop();
       if (fleetNumber == undefined) fleetNumber = '';
       var fleetName = $(".input-text", renameForm).eq(0).val() + " " + fleetNumber; //#DEBUG#      console.log("fleetName: " + fleetName);
-      // Edit the notification message
-      var message = result.notificationList[indexOfFleetId].notificationOptions.message; //#DEBUG#      console.log("message: " + message);
-      result.notificationList[indexOfFleetId].notificationOptions.message = fleetName + " " + message.match(/has.+|will.+/);//#DEBUG# console.log("newMessage: " + result.notificationList[indexOfFleetId].notificationOptions.message);
+      // Edit the notification fleetName
+      result.notificationList[indexOfFleetId].fleetName = fleetName;
       // Save the modifications
       chrome.storage.local.set({notificationList:result.notificationList}, function(){
         console.log("Fleet name modified.");

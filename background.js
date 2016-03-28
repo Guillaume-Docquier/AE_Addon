@@ -46,6 +46,8 @@ function printArray(array)
   }
 }
 
+//=Creates a fleet notification
+// @notification object as {type, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
 function createFleetNotification(notification)
 {
   // Create all we need for setting up the notification in the future
@@ -58,6 +60,19 @@ function createFleetNotification(notification)
   var contextMessage = "Fleet size: " + notification.fleetSize;
   var notificationOptions = {type:'basic', iconUrl:'logo-white.png', title:title, message:message, contextMessage:contextMessage}
   chrome.notifications.create(notification.fleetId, notificationOptions);
+}
+
+//=Updates the storage
+// @storageKey is a string used to retrieve the right storage
+// @storageIndex is an int used to retrieve the right element
+// @updatedElement is the element to put in the storage
+function updateStorage(storageKey, storageIndex, updatedElement)
+{
+  chrome.storage.local.get(storageKey, function(result)
+  {
+    result[storageKey][storageIndex] = updatedElement;
+    chrome.storage.local.set(result, function(){console.log("Storage updated: " + storageKey);});
+  });
 }
 
 // Say hi
@@ -151,15 +166,16 @@ chrome.runtime.onMessage.addListener(
         // Overwrite existing alarm
         request.notificationDate -= 2000; // Remove some time to compensate for script response time
         chrome.alarms.create(request.alarmName, {when:request.notificationDate});
+        // Change some values
+        var alarmName = parseInt(request.alarmName);
+        delete request.alarmName;
+        request.type = "new_fleet_notification";
         // Update notificationList
-        chrome.storage.local.get("notificationList", function(result)
-        {
-          var alarmName = parseInt(request.alarmName);
-          delete request.alarmName;
-          request.type = "new_fleet_notification";
-          result.notificationList[alarmName] = request;
-          chrome.storage.local.set({notificationList:result.notificationList}, function(){console.log("Updated notification.");});
-        })
+        updateStorage("notificationList", alarmName, request)
+        break;
+      case "delete_fleet_notification":
+        chrome.alarms.clear(request.alarmName);
+        updateStorage("notificationList", parseInt(request.alarmName), "");
         break;
       case "get_url":
         chrome.tabs.get(sender.tab.id, function (tab) {

@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "permissions": [
       "storage",
       "notifications",
       "alarms",
       "tabs"
   ],
-  
+
   "content_scripts": [
     {
       "matches": [
@@ -88,8 +88,7 @@
         "http://*.astroempires.com/fleet.aspx?fleet=*"
       ],
       "exclude_matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move*",
-        "http://*.astroempires.com/fleet.aspx?fleet=*&view=move_start*"
+        "http://*.astroempires.com/fleet.aspx?fleet=*&view=*"
       ],
       "css": ["notificationUi.css"],
       "js": ["jquery-2.2.1.min.js", "notificationFleetUi.js"],

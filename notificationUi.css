@@ -13,9 +13,25 @@
   width: 19px;
   padding-left: 4px;
 }
-.notificationWrap .box3_content{
+#fleetOverview .box4_content, #fleetOverview .box4_content table{
   text-align: center !important;
 }
-.notificationWrap{
-  min-width: 391px !important;
+#fleetOverview .box4{
+  width: 421px !important;
+}
+#fleetOverview .box4_content table{
+  width: 100%;
+  overflow: visible;
+}
+#fleetOverview .box4_box-content-left, #fleetOverview .box4_box-content-right {
+  width: 6px;
+}
+#background-content>#local-header {
+  margin-bottom: 3px !important;
+}
+#unitsTable tr, #unitsTable td{
+  width:50%;
+}
+#unitsTable tr:not(:first-child):hover {
+  background-color: #1c3043;
 }

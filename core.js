@@ -18,27 +18,18 @@ chrome.storage.local.get("justLoggedIn", function(result)
 });
 
 //=Listen to incoming messages
-// #clicked_browser_action currently creates a fake notification
-// #notification_created serves for debugging notifications
-// #creating_alarm serves for debugging notifications
-// #alarm_created serves for debugging notifications
+// #auto-update updates the page if there is any new message/board post
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    switch(request.message)
+    switch(request.type)
     {
-    case "clicked_browser_action":
-      var date = Date.now()+5000; // 5 seconds from now
-      //#DEBUG# console.log("5 seconds...");
-      chrome.runtime.sendMessage({type:"new_fleet_notification", fleetId:"43",fleetName:"S.H.I.E.L.D. 43",fleetLocation:"Earth(L00:11:22:33)",fleetSize:"43,000",notificationDate:date,notificationDelay:"0"});
-      break;
-    case "notification_created":
-      console.log("Notification created. Id: " + request.id);
-      break;
-    case "creating_alarm":
-      console.log("Creating alarm. Id: " + request.id);
-      break;
-    case "alarm_created":
-      console.log("Alarm created. Id: " + request.id);
+    case "auto-update":
+      console.log("Auto-update");
+      // Update the messages/board
+      $("#main-header-infobox_content .row1 .menu-item").eq(2).html(request.messages.button);
+      $("#main-header-infobox_content .row1 .menu-item").eq(3).html(request.messages.field);
+      $("#main-header-infobox_content .row2 .menu-item").eq(2).html(request.board.button);
+      $("#main-header-infobox_content .row2 .menu-item").eq(3).html(request.board.field);
       break;
     }
   }

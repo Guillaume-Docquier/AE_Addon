@@ -19,7 +19,7 @@ function sendMessage(message)
 //=Finds all fleets in the DOM and saves them in strage.local.fleetList
 // Called upon receiving xmlHTTPrequest response
 // @no-arguments
-function fleetListUpdate ()
+function fleetListUpdate()
 {
   console.log("init - Updating fleetList")
   var fleetPageDOM = this.response;
@@ -75,30 +75,70 @@ function updateStorage(storageKey, storageIndex, updatedElement)
   });
 }
 
+//=Looks if there are any new messages or board posts
+// Also updates the fleetList
+function autoUpdate()
+{
+  var pageDOM = this.response;
+  var messagesButtonHtml = $("#main-header-infobox_content .row1 .menu-item", pageDOM).eq(2).html();
+  var messagesFieldHtml = $("#main-header-infobox_content .row1 .menu-item", pageDOM).eq(3).html();
+  var boardButtonHtml = $("#main-header-infobox_content .row2 .menu-item", pageDOM).eq(2).html();
+  var boardFieldHtml = $("#main-header-infobox_content .row2 .menu-item", pageDOM).eq(3).html();
+  // Send to all tabs
+  chrome.tabs.query({}, function(tabs) {
+    var message = {type:"auto-update", messages:{button:messagesButtonHtml, field:messagesFieldHtml}, board:{button:boardButtonHtml, field:boardFieldHtml}};
+    for (var i=0; i<tabs.length; ++i) {
+        chrome.tabs.sendMessage(tabs[i].id, message);
+    }
+  });
+  // Update fleet list
+  domRequest("http://lyra.astroempires.com/fleet.aspx", fleetListUpdate);
+}
+
+//=Acesses another web page and does something
+// @url a link to the webpage to visit
+// @callback a function to execute on the page
+function domRequest(url, callback)
+{
+  var req = new XMLHttpRequest();
+  req.responseType = 'document';
+  req.addEventListener("load", callback);
+  req.open("GET", url);
+  req.send();
+}
+
 // Say hi
 console.log("background.js");
 
 // Alarm listener
-// Currently only used for fleet notifications
 chrome.alarms.onAlarm.addListener(function(alarm)
 {
   console.log("Alarm fired!");
-  // Alarm fired, get the notification options
-  chrome.storage.local.get("notificationList", function(result)
+  // Triggers every minute
+  if(alarm.name == "auto-update")
   {
-    // Name of the alarm was used as index
-    var notification = result.notificationList[parseInt(alarm.name)];
-    // Determine the type of notification
-    switch(notification.type)
+    console.log(Date.now());
+    domRequest("http://lyra.astroempires.com/account.aspx", autoUpdate);
+  }
+  else
+  {
+    // Notification alarm fired, get the notificationList
+    chrome.storage.local.get("notificationList", function(result)
     {
-      case "new_fleet_notification":
-        createFleetNotification(notification);
-        // Remove this notification from the list
-        result.notificationList[parseInt(alarm.name)] = "";
-        chrome.storage.local.set({notificationList:result.notificationList});
-        break;
-    }
-  });
+      // Name of the alarm was used as index
+      var notification = result.notificationList[parseInt(alarm.name)];
+      // Determine the type of notification
+      switch(notification.type)
+      {
+        case "new_fleet_notification":
+          createFleetNotification(notification);
+          // Remove this notification from the list
+          result.notificationList[parseInt(alarm.name)] = "";
+          chrome.storage.local.set({notificationList:result.notificationList});
+          break;
+      }
+    });
+  }
 });
 
 // Called when the user clicks on the browser action.
@@ -135,8 +175,7 @@ chrome.browserAction.onClicked.addListener(function(tab)
 // #init proceeds with initializations
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse)
-  {
-    switch(request.type)
+  {switch(request.type)
     {
       case "new_fleet_notification":
         // Object as {type, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
@@ -183,7 +222,7 @@ chrome.runtime.onMessage.addListener(
           sendResponse(url);
         });
         return true;
-      case "init": // Reset alarms and check fleets?
+      case "init":
         console.log("init - Updating notificationList");
         chrome.alarms.clearAll(); // Clear alarms
         chrome.storage.local.get("notificationList", function(result){
@@ -210,13 +249,18 @@ chrome.runtime.onMessage.addListener(
           chrome.storage.local.set({notificationList:newNotificationList}, function(){console.log("init - notificationList updated");});
         });
         // Update fleet list
-        var fleetReq = new XMLHttpRequest();
-        fleetReq.responseType = 'document';
-        fleetReq.addEventListener("load", fleetListUpdate); // Can I use fleetListUpdate.js here?
-        fleetReq.open("GET", "http://lyra.astroempires.com/fleet.aspx");
-        fleetReq.send();
+        domRequest("http://lyra.astroempires.com/fleet.aspx", fleetListUpdate);
+        // Auto-update messages/board status every minute
+        chrome.alarms.create("auto-update", {when:Date.now(), periodInMinutes:1});
         console.log("init - Done.");
         return true;
     }
   }
 );
+
+//=Testing
+/*chrome.runtime.onSuspend.addListener(function()
+{
+  console.log("Suspended...");
+  chrome.alarms.clearAll();
+})*/

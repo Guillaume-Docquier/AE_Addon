@@ -6,9 +6,6 @@ Choose to be notified when
 * building queued, building finished
 * tech q/f
 * prod f
-* you receive a message
-* you are attacked
-* there is a new board post
 
 Fleet launch programming    
 Integrated battle calc  
@@ -18,8 +15,13 @@ Automated tech checking
 You will find an AE_Addon settings section in the display settings that allows you to enable/disable any functionality.  
 You can now see the expected arrival time (server/local time) before launching your fleet. _Requires animated server time_  
 You can now choose to be notified before a fleet lands when moving/recalling it.  
+Message and board post number are now automatically updated every minute.  
 
-### Version history (Current version: v0.4.8)  
+### Version history (Current version: v0.5.0)  
+v0.5.0
+> **Added**    
+Message and board post number are now automatically updated every minute.  
+
 v0.4.7
 > **Modified**    
 You can now choose to be notified x seconds before a fleet lands when **recalling** it.  

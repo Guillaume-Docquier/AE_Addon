@@ -40,7 +40,12 @@ if(isMoving)
     if(urlNumbers.length == 2)
     {
       var notificationDelay = urlNumbers.pop();
-      if(notificationDelay > -1) currentNotificationText = "You will be notified " + notificationDelay + " seconds before this fleet lands";
+      if(notificationDelay > -1)
+      {
+        currentNotificationText = "You will be notified " + notificationDelay.toString() + " seconds before this fleet lands";
+        // The asyc call might finish after the rest of the script.
+        $("#currentNotification").text(currentNotificationText);
+      }
     }
     var currentFleetId = urlNumbers.pop();
     // If notificationDelay wasn't found, search the chrome.storage.notificationList
@@ -98,6 +103,7 @@ for(var i = 0; i < shipList.length; i++)
 }
 // Add the recycler status
 if(recyclerStatusHtml != undefined) $("#fleetComposition .box4_content").append("<br/> <center>" + recyclerStatusHtml + "</center>");
+console.log("fleetComposition section");
 
 // Add stuff if fleet is moving
 if(isMoving)
@@ -107,7 +113,7 @@ if(isMoving)
   $("#background-content").children().eq(5).remove();
   // Add our UI
   $("#fleetOverview").append("<table class='box-complex box box-compact box4' id='fleetTravel'> <tbody> <tr> <td> <table class='box4_box-header box-header'> <tbody> <tr> <td class='box4_box-header-left box-header-left'>&nbsp;</td><td class='box4_box-header-center box-header-center'>&nbsp;</td><td class='box4_box-header-right box-header-right'>&nbsp;</td></tr></tbody> </table> </td></tr><tr> <td> <table class='box4_box-content box-content'> <tbody> <tr> <td class='box4_box-content-left box-content-left'>&nbsp;</td><td class='box4_box-content-center box-content-center'> <div class='box4_content'> <b>" + travelTimeText + "</b> <br><div id='currentNotification' class='notify'>" + currentNotificationText + "</div></div></td><td class='box4_box-content-right box-content-right'>&nbsp;</td></tr></tbody> </table> </td></tr><tr> <td> <table class='box4_box-footer box-footer'> <tbody> <tr> <td class='box4_box-footer-left box-footer-left'>&nbsp;</td><td class='box4_box-footer-center box-footer-center'>&nbsp;</td><td class='box4_box-footer-right box-footer-right'>&nbsp;</td></tr></tbody> </table> </td></tr></tbody> </table>");
-  console.log("Fleet is moving.");
+  console.log("fleetTravel section");
 }
 // Add stuff if fleet can be recalled
 if(canRecall)
@@ -122,233 +128,6 @@ if(canRecall)
   {
     changeFormAction();
   });
-  console.log("Fleet can be recalled.");
+  console.log("fleetRecall section");
 }
-/*
-<table id='fleetOverviewBg' class='box-complex box box-full box3'>
-    <tr>
-        <td>
-            <table class='box3_box-header box-header'>
-                <tr>
-                    <td class='box3_box-header-left box-header-left'>&nbsp;</td>
-                    <td class='box3_box-header-center box-header-center'>
-                        <div class='box3_box-title-wrapper box-title-wrapper'>
-                            <div class='box3_box-title-container box-title-container'>
-                                <table class='box3_box-title box-title'>
-                                    <tr>
-                                        <td class='box3_box-title-left box-title-left'>&nbsp;</td>
-                                        <td class='box3_box-title-center box-title-center'>Fleet Overview</td>
-                                        <td class='box3_box-title-right box-title-right'>&nbsp;</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
-                    <td class='box3_box-header-right box-header-right'>&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class='box3_box-content box-content'>
-                <tr>
-                    <td class='box3_box-content-left box-content-left'>&nbsp;</td>
-                    <td class='box3_box-content-center box-content-center'>
-                        <div class='box3_content'>
-                            <div class='box3_box-title-pad box-title-pad'>&nbsp;</div>
-                            <table class='layout'>
-                                <tr>
-                                    <td width='*' style='vertical-align: top; padding: 0px 5px 0px 5px;'>
-                                        <table class='layout'>
-                                            <tr>
-                                                <td style='vertical-align: top;'>
-                                                    <br />
-                                                    <center id='fleetOverview'>
-                                                      <!-- body -->
-                                                        <table class='box-complex box box-compact box4' id='fleetComposition'>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table class='box4_box-header box-header'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-header-left box-header-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-header-center box-header-center'>&nbsp;</td>
-                                                                                    <td class='box4_box-header-right box-header-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                      <!-- Content -->
-                                                                        <table class='box4_box-content box-content'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-content-left box-content-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-content-center box-content-center box4_content'>
-                                                                                      <table class='layout listing tbllisting2'>
-                                                                                        <tr class='listing-header'>
-                                                                                            <th>Ship</th>
-                                                                                            <th>Units</th>
-                                                                                        </tr>
-                                                                                        <!-- **APPEND ROWS** -->
-                                                                                      </table>
-                                                                                      <br />
-                                                                                      <center> " + fleetSizeText + "</center>
-                                                                                      <br />
-                                                                                      <center> " + recyclerStatusHtml + "</center>
-                                                                                    </td>
-                                                                                    <td class='box4_box-content-right box-content-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table class='box4_box-footer box-footer'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-footer-left box-footer-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-footer-center box-footer-center'>&nbsp;</td>
-                                                                                    <td class='box4_box-footer-right box-footer-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <table class='box-complex box box-compact box4' id='fleetTravel'>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table class='box4_box-header box-header'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-header-left box-header-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-header-center box-header-center'>&nbsp;</td>
-                                                                                    <td class='box4_box-header-right box-header-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                      <!-- Content -->
-                                                                        <table class='box4_box-content box-content'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-content-left box-content-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-content-center box-content-center'>
-                                                                                      <div class="box4_content">
-                                                                                        <b>" + travelTimeText + "</b>
-                                                                                        <br>
-                                                                                        <div id="currentNotification" class="notify">" + currentNotificationText  + "</div>
-                                                                                      </div>
-                                                                                    </td>
-                                                                                    <td class='box4_box-content-right box-content-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table class='box4_box-footer box-footer'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-footer-left box-footer-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-footer-center box-footer-center'>&nbsp;</td>
-                                                                                    <td class='box4_box-footer-right box-footer-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <table class='box-complex box box-compact box4' id='fleetRecall'>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table class='box4_box-header box-header'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-header-left box-header-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-header-center box-header-center'>&nbsp;</td>
-                                                                                    <td class='box4_box-header-right box-header-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                      <!-- Content -->
-                                                                        <table class='box4_box-content box-content'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-content-left box-content-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-content-center box-content-center'>
-                                                                                      <div class="box4_content">
-                                                                                        <div id="recallNotification" class="notify">
-                                                                                          <input type="checkbox" name="be_notified" id="notificationFleetRecall" class="notificationCheckbox notification">
-                                                                                          <label for="notificationFleetRecall">Upon recalling, be notified
-                                                                                            <input type="text" id="notificationOffSetRecall" class="input-numeric notificationInput notification" value="5"> seconds before landing</label>
-                                                                                          </div>
-                                                                                          " + recallForm + "
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td class='box4_box-content-right box-content-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table class='box4_box-footer box-footer'>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class='box4_box-footer-left box-footer-left'>&nbsp;</td>
-                                                                                    <td class='box4_box-footer-center box-footer-center'>&nbsp;</td>
-                                                                                    <td class='box4_box-footer-right box-footer-right'>&nbsp;</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </center>
-                                                    <br>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                    <td class='box3_box-content-right box-content-right'>&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class='box3_box-footer box-footer'>
-                <tr>
-                    <td class='box3_box-footer-left box-footer-left'>&nbsp;</td>
-                    <td class='box3_box-footer-center box-footer-center'>&nbsp;</td>
-                    <td class='box3_box-footer-right box-footer-right'>&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>*/
+console.log("... complete!");

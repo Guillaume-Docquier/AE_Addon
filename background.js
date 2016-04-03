@@ -5,15 +5,15 @@
 //++                                                                                       ++//
 //++ ===================================================================================== ++//
 
-//=Sends a message
-// @message is the message to be sent
-function sendMessage(message)
+//=Prints an array to the console
+// @array the array to be printed
+function printArray(array)
 {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+  if(array.length == 0) console.log("empty");
+  for(var i = 0; i < array.length; i++)
   {
-    var activeTab = tabs[0];
-    chrome.tabs.sendMessage(activeTab.id, message);
-  });
+    console.log(array[i]);
+  }
 }
 
 //=Finds all fleets in the DOM and saves them in strage.local.fleetList
@@ -21,7 +21,7 @@ function sendMessage(message)
 // @no-arguments
 function fleetListUpdate()
 {
-  console.log("init - Updating fleetList")
+  console.log("Updating fleetList...")
   var fleetPageDOM = this.response;
   // Find all the fleets and store them
   var fleets = $(".sorttable tbody", fleetPageDOM).children();
@@ -32,18 +32,7 @@ function fleetListUpdate()
     var fleetId = $("a", fleets.eq(i)).attr('href').match(/\d+/).pop(); //#DEBUG#  console.log("fleetId: " + fleetId + ", " + typeof fleetId);
     fleetArray.push(fleetId);
   }
-  chrome.storage.local.set({fleetList: fleetArray}, function(){console.log("init - fleetList updated");});
-}
-
-//=Prints an array to the console
-// @array the array to be printed
-function printArray(array)
-{
-  if(array.length == 0) console.log("empty");
-  for(var i = 0; i < array.length; i++)
-  {
-    console.log(array[i]);
-  }
+  chrome.storage.local.set({fleetList: fleetArray}, function(){console.log("...fleetList updated");});
 }
 
 //=Creates a fleet notification
@@ -76,9 +65,9 @@ function updateStorage(storageKey, storageIndex, updatedElement)
 }
 
 //=Looks if there are any new messages or board posts
-// Also updates the fleetList
 function autoUpdate()
 {
+  // Update board/messages
   var pageDOM = this.response;
   var messagesButtonHtml = $("#main-header-infobox_content .row1 .menu-item", pageDOM).eq(2).html();
   var messagesFieldHtml = $("#main-header-infobox_content .row1 .menu-item", pageDOM).eq(3).html();
@@ -91,13 +80,11 @@ function autoUpdate()
         chrome.tabs.sendMessage(tabs[i].id, message);
     }
   });
-  // Update fleet list
-  domRequest("http://lyra.astroempires.com/fleet.aspx", fleetListUpdate);
 }
 
 //=Acesses another web page and does something
 // @url a link to the webpage to visit
-// @callback a function to execute on the page
+// @callback a function to execute on the returned DOM
 function domRequest(url, callback)
 {
   var req = new XMLHttpRequest();
@@ -117,7 +104,6 @@ chrome.alarms.onAlarm.addListener(function(alarm)
   // Triggers every minute
   if(alarm.name == "auto-update")
   {
-    console.log(Date.now());
     domRequest("http://lyra.astroempires.com/account.aspx", autoUpdate);
   }
   else
@@ -175,7 +161,13 @@ chrome.browserAction.onClicked.addListener(function(tab)
 // #init proceeds with initializations
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse)
-  {switch(request.type)
+  {
+    // Auto-update every minute
+    chrome.alarms.get("auto-update", function(alarm)
+    {
+      if(alarm == undefined) chrome.alarms.create("auto-update", {periodInMinutes:1});
+    });
+    switch(request.type)
     {
       case "new_fleet_notification":
         // Object as {type, fleetId,fleetName,fleetDestination,fleetSize,notificationDate,notificationDelay}
@@ -250,8 +242,6 @@ chrome.runtime.onMessage.addListener(
         });
         // Update fleet list
         domRequest("http://lyra.astroempires.com/fleet.aspx", fleetListUpdate);
-        // Auto-update messages/board status every minute
-        chrome.alarms.create("auto-update", {when:Date.now(), periodInMinutes:1});
         console.log("init - Done.");
         return true;
     }

@@ -29,8 +29,11 @@
 #background-content>#local-header {
   margin-bottom: 3px !important;
 }
-#unitsTable tr, #unitsTable td{
-  width:50%;
+#unitsTable .double {
+  width:50% !important;
+}
+#unitsTable .triple {
+  width:33% !important;
 }
 #unitsTable tr:not(:first-child):hover {
   background-color: #1c3043;

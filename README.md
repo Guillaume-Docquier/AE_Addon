@@ -17,7 +17,7 @@ You can now see the expected arrival time (server/local time) before launching y
 You can now choose to be notified before a fleet lands when moving/recalling it.  
 Message and board post number are now automatically updated every minute across all tabs and whenever you view them.  
 
-### Version history (Current version: v0.5.2)  
+### Version history (Current version: v0.5.3)  
 v0.5.2
 > **Modified**    
 Viewing board posts and messages updates all other tabs.  

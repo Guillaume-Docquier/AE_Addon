@@ -243,7 +243,10 @@ chrome.runtime.onMessage.addListener(
         // Update fleet list
         domRequest("http://lyra.astroempires.com/fleet.aspx", fleetListUpdate);
         console.log("init - Done.");
-        return true;
+        break;
+      case "update_msg_board":
+        domRequest("http://lyra.astroempires.com/account.aspx", autoUpdate);
+        break;
     }
   }
 );

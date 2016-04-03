@@ -15,9 +15,13 @@ Automated tech checking
 You will find an AE_Addon settings section in the display settings that allows you to enable/disable any functionality.  
 You can now see the expected arrival time (server/local time) before launching your fleet. _Requires animated server time_  
 You can now choose to be notified before a fleet lands when moving/recalling it.  
-Message and board post number are now automatically updated every minute.  
+Message and board post number are now automatically updated every minute across all tabs and whenever you view them.  
 
-### Version history (Current version: v0.5.1)  
+### Version history (Current version: v0.5.2)  
+v0.5.2
+> **Modified**    
+Viewing board posts and messages updates all other tabs.  
+
 v0.5.0
 > **Added**    
 Message and board post number are now automatically updated every minute.  

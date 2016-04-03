@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AstroEmpires add-on",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "permissions": [
       "storage",
       "notifications",
@@ -17,6 +17,14 @@
       ],
       "js": ["jquery-2.2.1.min.js", "login.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.astroempires.com/messages.aspx*",
+        "http://*.astroempires.com/board.aspx*"
+      ],
+      "js": ["jquery-2.2.1.min.js", "updateMsgBoard.js"],
+      "run_at": "document_start"
     },
     {
       "matches": [

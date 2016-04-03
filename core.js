@@ -30,6 +30,20 @@ chrome.runtime.onMessage.addListener(
       $("#main-header-infobox_content .row1 .menu-item").eq(3).html(request.messages.field);
       $("#main-header-infobox_content .row2 .menu-item").eq(2).html(request.board.button);
       $("#main-header-infobox_content .row2 .menu-item").eq(3).html(request.board.field);
+      // Figure out if the messages/board button should be active
+      chrome.runtime.sendMessage({type: "get_url"}, function(url)
+      {
+        if(url.indexOf("messages") > -1)
+        {
+          $("#messages").addClass("button-normal-active");
+          $("#messages").removeClass("button-normal");
+        }
+        else if(url.indexOf("board") > -1)
+        {
+          $("#board").addClass("button-normal-active");
+          $("#board").removeClass("button-normal");
+        }
+      });
       break;
     }
   }

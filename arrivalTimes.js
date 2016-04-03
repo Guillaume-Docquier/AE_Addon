@@ -18,20 +18,21 @@ function addTimeStrings(travelTime, serverTime){
   var localTimeMS = Date.now();
   var serverTimeMS = new Date(serverTime).getTime();
   // Only keep numbers
-  var travelTimeArray = travelTime.match(/\d+/g);//#DEBUG# console.log(travelTimeArray);
+  var travelTimeArray = travelTime.match(/\d+/g);//#DEBUG#  console.log("travelTimeArray: " + travelTimeArray);
   travelTimeArray.reverse(); // New format [s,m,h]
-  //#DEBUG# console.log(durationArray);
+  //#DEBUG#  console.log("travelTimeArrayReversed: " + travelTimeArray);
   // Convert [s,m,h] to ms
   var travelTimeMS = 0;
+  //#DEBUG# console.log("travelTimeArray.length: " + travelTimeArray.length);
   switch(travelTimeArray.length)
   {
     case 3:
-      travelTimeMS += parseInt(travelTimeArray.pop()) * 360000;
+      travelTimeMS += parseInt(travelTimeArray.pop()) * 60 * 60 * 1000;
     case 2:
-      travelTimeMS += parseInt(travelTimeArray.pop()) * 60000;
+      travelTimeMS += parseInt(travelTimeArray.pop()) * 60 * 1000;
     case 1:
       travelTimeMS += parseInt(travelTimeArray.pop()) * 1000;
-  }
+  }//#DEBUG#  console.log("travelTimeMS : " + travelTimeMS);
   // Add milliseconds
   var serverArrivalDate = new Date(serverTimeMS + travelTimeMS);
   var localArrivalDate = new Date(localTimeMS + travelTimeMS);

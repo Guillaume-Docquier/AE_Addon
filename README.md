@@ -45,3 +45,6 @@ You can now see the expected arrival time (**local** time) before launching your
 v0.1          
 > **Added**   
 You can now see the expected arrival time (server time) before launching your fleet. _Requires animated server time_
+
+### Comments  
+Links like "*/AE_Addon/tests/fleet_overview/*" are used to test the extension while developing it.

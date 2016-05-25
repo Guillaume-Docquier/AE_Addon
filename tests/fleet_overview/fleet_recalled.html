@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html>
+
+<head>
+    <title>Fleets</title>
+    <meta http-equiv='X-UA-Compatible' content='IE=9' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='stylesheet' type='text/css' href='http://cdn.astroempires.com/css/common_v2.0.31_b.css'>
+    <link rel='stylesheet' type='text/css' href='http://cdn.astroempires.com/skins/BlueNova_v2.0.21/base.css'>
+    <link rel='stylesheet' type='text/css' href='http://cdn.astroempires.com/skins/BlueNova_v2.0.21/style_8.css'>
+    <script type='text/javascript' src='http://cdn.astroempires.com/javascript/common_v2.0.27d.js'></script>
+    <script type='text/javascript' src='http://cdn.astroempires.com/javascript/sort_v2.0.27.js'></script>
+    <meta http-equiv='cache-control' content='no-cache' />
+    <meta http-equiv='pragma' content='no-cache' />
+    <meta http-equiv='expires' content='0' />
+    <link rel='shortcut icon' href='http://cdn.astroempires.com/images/favicon.ico' />
+    <script type='text/javascript' src='http://cdn.astroempires.com/javascript/jquery-1.8.2.min.js'></script>
+    <script type='text/javascript' src='http://cdn.astroempires.com/javascript/js_timers_v1.12.js'></script>
+    <script type='text/javascript' src='http://cdn.astroempires.com/javascript/js_top_header_menu_v1.2.js'></script>
+    <script type='text/javascript' src='http://cdn.astroempires.com/javascript/jquery.marquee_v1.4.js'></script>
+</head>
+
+<body class='text_normal default_page'>
+    <table id='background-container'>
+        <tr>
+            <td id='background-outer' class='background-footer default_background-footer planet_blue'>
+                <div id='background-inner' class='background-header default_background-header '>
+                    <table id='top-header' class='box-simple box box-compact'>
+                        <tr>
+                            <td class='box-left'>&nbsp;</td>
+                            <td class='box-center box_content'>
+                                <table id='top-header_menu' class='menu'>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <div id='top-header_server-time'><span id='server-time' title='2016/05/11 19:43:30'>11 May 2016, 19:43:30</span></div>
+                            </td>
+                            <td class='box-right'>&nbsp;</td>
+                        </tr>
+                    </table>
+                    <script type='text/javascript'>
+                        layout = 2.1;
+                        logout_id = '8289705955665544';
+                        is_round_server = false;
+                        server = 'Lyra';
+                        rank = 126;
+                        replace_top_header_menu()
+                    </script>
+                    <script type='text/javascript'>
+                        clientDate_format = 0;
+                        display_animated_server_time = true;
+                        display_end_time = true;
+                        header_timer();
+                        setInterval('header_timer();', 250);
+                    </script>
+                    <div id='background-content' class='background-content default_background-content '>
+                        <table id='main-header' class='box box-full'>
+                            <tr>
+                                <td>
+                                    <div id='main-header-logo'>&nbsp;</div>
+                                </td>
+                                <td id='main-header-infobox_container'>
+                                    <table id='main-header-infobox' class='box-simple box box-compact'>
+                                        <tr>
+                                            <td class='box-left'>&nbsp;</td>
+                                            <td class='box-center box_content'>
+                                                <table id='main-header-infobox_content' class='menu'>
+                                                    <tr class='row1'>
+                                                        <td class='menu-item'>
+                                                            <table id='account' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='account.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='account.aspx'>Account</a></td>
+                                                                    <td class='button-right'><a href='account.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table class='field field-normal'>
+                                                                <tr>
+                                                                    <td class='field-left'>&nbsp;</td>
+                                                                    <td class='field-center'>54690</td>
+                                                                    <td class='field-right'>&nbsp;</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table id='messages' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='messages.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='messages.aspx'>Messages</a></td>
+                                                                    <td class='button-right'><a href='messages.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table class='field field-normal'>
+                                                                <tr>
+                                                                    <td class='field-left'>&nbsp;</td>
+                                                                    <td class='field-center'>0 New</td>
+                                                                    <td class='field-right'>&nbsp;</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class='row2'>
+                                                        <td class='menu-item'>
+                                                            <table id='credits' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='credits.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='credits.aspx'>Credits</a></td>
+                                                                    <td class='button-right'><a href='credits.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table class='field field-normal'>
+                                                                <tr>
+                                                                    <td class='field-left'>&nbsp;</td>
+                                                                    <td class='field-center'>44,902</td>
+                                                                    <td class='field-right'>&nbsp;</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table id='board' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='board.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='board.aspx'>Board</a></td>
+                                                                    <td class='button-right'><a href='board.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table class='field field-normal'>
+                                                                <tr>
+                                                                    <td class='field-left'>&nbsp;</td>
+                                                                    <td class='field-center'>0 New</td>
+                                                                    <td class='field-right'>&nbsp;</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class='box-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='main-header-servers_container' colspan='2'>
+                                    <table id='main-header-servers' class='box-simple box box-compact'>
+                                        <tr>
+                                            <td class='box-left'>&nbsp;</td>
+                                            <td class='box-center box_content'><small>Server: </small><span style='position: relative;' id='servers-dropdown'><small><a href='account.aspx?view=servers' onclick='return !1;'>Lyra <small>&#9660;</small></a></small><div id='servers-list' style='position: absolute; display: none; width: auto; z-index: 10; left: -5px; top: 15px;'><table class='no_back' bgcolor='#223' style='border: #446 solid 1px;'><tr><th style='padding: 6px; line-height: 140%'><a href='http://alpha.astroempires.com/account.aspx'>Alpha</a><br /><a href='http://beta.astroempires.com/account.aspx'>Beta</a><br /><a href='http://ceti.astroempires.com/account.aspx'>Ceti</a><br /><a href='http://delta.astroempires.com/account.aspx'>Delta</a><br /><a href='http://epsilon.astroempires.com/account.aspx'>Epsilon</a><br /><a href='http://fenix.astroempires.com/account.aspx'>Fenix</a><br /><a href='http://gamma.astroempires.com/account.aspx'>Gamma</a><br /><a href='http://helion.astroempires.com/account.aspx'>Helion</a><br /><a href='http://ixion.astroempires.com/account.aspx'>Ixion</a><br /><a href='http://juno.astroempires.com/account.aspx'>Juno</a><br /><a href='http://kappa.astroempires.com/account.aspx'>Kappa</a><br />Lyra<br /><a href='http://mira.astroempires.com/account.aspx'>Mira</a><br /><a href='http://nova.astroempires.com/account.aspx'>Nova</a><br /><a href='http://omega.astroempires.com/account.aspx'>Omega</a><br /><a href='http://pegasus.astroempires.com/account.aspx'>Pegasus</a><br /><a href='http://quantum.astroempires.com/account.aspx'>Quantum</a><br /><a href='http://rigel.astroempires.com/account.aspx'>Rigel</a><br /><a href='http://andromeda.astroempires.com/account.aspx'>Andromeda</a><br /><a href='http://bravo.astroempires.com/account.aspx'>Bravo</a><br /><a href='http://centauri.astroempires.com/account.aspx'>Centauri</a><br /><a href='http://drako.astroempires.com/account.aspx'>Drako</a><br /><a href='http://elysium.astroempires.com/account.aspx'>Elysium</a><br /><a href='http://frontier.astroempires.com/account.aspx'>Frontier</a><br />- - - -<br /><a href='http://ares.astroempires.com/account.aspx'>Ares</a><br /></th></tr></table></div></span></td>
+                                            <td class='box-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='main-header-news_container' colspan='2'>
+                                    <table id='main-header-news' class='box-simple box box-full'>
+                                        <tr>
+                                            <td class='box-left'>&nbsp;</td>
+                                            <td class='box-center box_content'>
+                                                <div class='marquee2'>
+                                                    <marquee loop='0' behavior='scroll' direction='left' scrollamount='1' left='1'> &nbsp; <a href='profile.aspx?player=7615'>[NoOne] Tarquin</a> vs. <a href='profile.aspx?player=46116'>Drekons</a> losses: 34,555 / 32,000 &nbsp;&nbsp; <a href='profile.aspx?player=62179'>[OCEAN] Wingman - TRW</a> vs. <a href='profile.aspx?player=36890'>[NoOne] Sgt G</a> losses: 11,000 / 35,105</marquee>
+                                                </div>
+                                                <script type='text/javascript'>
+                                                    $(function() {
+                                                        $('div.marquee2 marquee').marquee('pointer').mouseover(function() {
+                                                            $(this).trigger('stop');
+                                                        }).mouseout(function() {
+                                                            $(this).trigger('start');
+                                                        });
+                                                    });
+                                                </script>
+                                                <div class='spacer' style='height: 1px;'>&nbsp;</div>
+                                            </td>
+                                            <td class='box-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='main-header-nav_container' colspan='2'>
+                                    <table id='main-header-nav' class='box-simple box box-full'>
+                                        <tr>
+                                            <td class='box-left'>&nbsp;</td>
+                                            <td class='box-center box_content'>
+                                                <table id='main-header-nav_menu' class='menu'>
+                                                    <tr class='row1'>
+                                                        <td class='menu-item' style='width: 12%'>
+                                                            <table id='bases' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='base.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='base.aspx'>Bases</a></td>
+                                                                    <td class='button-right'><a href='base.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 10%'>
+                                                            <table id='map' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='map.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='map.aspx'>Map</a></td>
+                                                                    <td class='button-right'><a href='map.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 14%'>
+                                                            <table id='fleets' class='button button-normal-active'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='fleet.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='fleet.aspx'>Fleets</a></td>
+                                                                    <td class='button-right'><a href='fleet.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 13%'>
+                                                            <table id='empire' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='empire.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='empire.aspx'>Empire</a></td>
+                                                                    <td class='button-right'><a href='empire.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 18%'>
+                                                            <table id='commanders' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='commander.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='commander.aspx'>Commanders</a></td>
+                                                                    <td class='button-right'><a href='commander.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 13%'>
+                                                            <table id='guild' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='guild.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'><a href='guild.aspx'>Guild</a></td>
+                                                                    <td class='button-right'><a href='guild.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 7%'>
+                                                            <table id='notes' title='Notes' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='notes.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'>
+                                                                        <a href='notes.aspx'> </a>
+                                                                    </td>
+                                                                    <td class='button-right'><a href='notes.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item' style='width: 6%'>
+                                                            <table id='bookmarks' title='Bookmarks' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='bookmarks.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'>
+                                                                        <a href='bookmarks.aspx'> </a>
+                                                                    </td>
+                                                                    <td class='button-right'><a href='bookmarks.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class='menu-separator'>
+                                                            <div>&nbsp;</div>
+                                                        </td>
+                                                        <td class='menu-item'>
+                                                            <table id='notifications' title='Notifications' onmouseover='buttonOver(this, "button button-normal-over")' onmouseout='buttonOut(this)' class='button button-normal'>
+                                                                <tr>
+                                                                    <td class='button-left'><a href='notifications.aspx'>&nbsp;</a></td>
+                                                                    <td class='button-center'>
+                                                                        <a href='notifications.aspx'> </a>
+                                                                    </td>
+                                                                    <td class='button-right'><a href='notifications.aspx'>&nbsp;</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class='box-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            $("#servers-dropdown").click(function(event) {
+                                $("#advertising2").toggle();
+                                $("#servers-list").toggle();
+                                event.stopPropagation();
+                            });
+                            $("body").click(function() {
+                                $("#servers-list").hide();
+                                $("#advertising2").show();
+                            });
+                        </script>
+                        <table id='advertising' class='box-complex box box-full default'>
+                            <tr>
+                                <td>
+                                    <table class='default_box-header box-header'>
+                                        <tr>
+                                            <td class='default_box-header-left box-header-left'>&nbsp;</td>
+                                            <td class='default_box-header-center box-header-center'>&nbsp;</td>
+                                            <td class='default_box-header-right box-header-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class='default_box-content box-content'>
+                                        <tr>
+                                            <td class='default_box-content-left box-content-left'>&nbsp;</td>
+                                            <td class='default_box-content-center box-content-center'>
+                                                <div class='default_content'>
+                                                    <table class='layout'>
+                                                        <tr>
+                                                            <th id='advertising-left' width='*'>Advertising</th>
+                                                            <th id='advertising-center' width='482' height='62'><span id='advertising2'><script type="text/javascript"><!--
+google_ad_client = "pub-1720867929038268";
+/* AE 468x60, created 3/18/10 */
+google_ad_slot = "8180146535";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></span></th>
+                                                            <th id='advertising-right' width='*'>Get extra game features
+                                                                <br />Remove advertising
+                                                                <br />
+                                                                <br /><a href='upgrade.aspx'>Upgrade Now</a></th>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class='default_box-content-right box-content-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class='default_box-footer box-footer'>
+                                        <tr>
+                                            <td class='default_box-footer-left box-footer-left'>&nbsp;</td>
+                                            <td class='default_box-footer-center box-footer-center'>&nbsp;</td>
+                                            <td class='default_box-footer-right box-footer-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table id='local-header' class='box-complex box box-full local-header'>
+                            <tr>
+                                <td>
+                                    <table class='local-header_box-header box-header'>
+                                        <tr>
+                                            <td class='local-header_box-header-left box-header-left'>&nbsp;</td>
+                                            <td class='local-header_box-header-center box-header-center'>&nbsp;</td>
+                                            <td class='local-header_box-header-right box-header-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class='local-header_box-content box-content'>
+                                        <tr>
+                                            <td class='local-header_box-content-left box-content-left'>&nbsp;</td>
+                                            <td class='local-header_box-content-center box-content-center'>
+                                                <div class='local-header_content'>
+                                                    <div id='local-header_content'>
+                                                        <table class='layout'>
+                                                            <tr>
+                                                                <th width='20%'>
+                                                                    <form action='fleet.aspx' method='get'>
+                                                                        <select name='fleet' onchange='submit()' class='input-select'>
+                                                                            <option value='10174002'>&nbsp;UNSC Fleet 4128 - Arcadia&nbsp;</option>
+                                                                            <option value='9916971'>&nbsp;UNSC Fleet 3032 - Earth&nbsp;</option>
+                                                                            <option value='8981366'>&nbsp;UNSC Fleet 1620 - Reach&nbsp;</option>
+                                                                            <option value='9004838'>&nbsp;UNSC Fleet 1719 - Infinity&nbsp;</option>
+                                                                            <option value='8981369'>&nbsp;UNSC Fleet 1622 - Gallifrey&nbsp;</option>
+                                                                            <option value='8994686'>&nbsp;UNSC Fleet 1677 - Pegasus&nbsp;</option>
+                                                                            <option value='8979355'>&nbsp;UNSC Fleet 1607 - Galactica&nbsp;</option>
+                                                                            <option value='8983735'>&nbsp;UNSC Fleet 1642 - Marathon&nbsp;</option>
+                                                                            <option value='9958847'>&nbsp;UNSC Fleet 3044 - Westeros&nbsp;</option>
+                                                                            <option value='9052382'>&nbsp;UNSC Fleet 1843 - Scranton&nbsp;</option>
+                                                                            <option value='8115809'>&nbsp;UNSC Fleet 1100 - Requiem&nbsp;</option>
+                                                                            <option value='8995387'>&nbsp;UNSC Fleet 1220 - Harvest&nbsp;</option>
+                                                                            <option value='8986829'>&nbsp;UNSC Fleet 1651 - Trinity&nbsp;</option>
+                                                                            <option value='8034057'>&nbsp;UNSC Fleet 1146 - Autumn&nbsp;</option>
+                                                                            <option value='8991044'>&nbsp;UNSC Fleet 1664 - Midnight&nbsp;</option>
+                                                                            <option value='9465525'>&nbsp;UNSC Fleet 2123 - Harmony&nbsp;</option>
+                                                                            <option value='9492703'>&nbsp;UNSC Fleet 2194 - Atlas&nbsp;</option>
+                                                                            <option value='8834620'>&nbsp;UNSC Fleet 1150 - Hope&nbsp;</option>
+                                                                            <option value='10281755'>&nbsp;-Å- 4130 - (L22:27:90:20)&nbsp;</option>
+                                                                            <option value='10284120'>&nbsp;-L05- - Below&nbsp;</option>
+                                                                            <option value='10285313'>&nbsp;-L04- - (L04:73:39:11)&nbsp;</option>
+                                                                            <option value='10285315'>&nbsp;-L03- - จP 5จ&nbsp;</option>
+                                                                            <option value='10285317'>&nbsp;-Å- 4143 - Tripp&nbsp;</option>
+                                                                            <option value='10285376'>&nbsp;-L19- - 19 COWBELL&nbsp;</option>
+                                                                            <option value='10285377'>&nbsp;-L23- - Mal&nbsp;</option>
+                                                                            <option value='10285538'>&nbsp;-L03- - (L03:22:17:41)&nbsp;</option>
+                                                                            <option value='10285539'>&nbsp;-L03- - (L03:45:07:32)&nbsp;</option>
+                                                                            <option value='10285540'>&nbsp;-L03- - (L03:58:25:52)&nbsp;</option>
+                                                                            <option value='10285541'>&nbsp;-L04- - (L04:63:18:51)&nbsp;</option>
+                                                                            <option value='10285542'>&nbsp;-L04- - (L04:66:17:40)&nbsp;</option>
+                                                                            <option value='10285543'>&nbsp;-L04- - (L04:23:19:11)&nbsp;</option>
+                                                                            <option value='10285544'>&nbsp;-L04- - (L04:54:08:11)&nbsp;</option>
+                                                                            <option value='10285546'>&nbsp;-L05- 1 - (L05:77:14:22)&nbsp;</option>
+                                                                            <option value='10285547'>&nbsp;-L05- 2 - (L05:55:07:11)&nbsp;</option>
+                                                                            <option value='10285548'>&nbsp;-L05- 3 - (L05:44:25:21)&nbsp;</option>
+                                                                            <option value='10285549'>&nbsp;-L05- 4 - (L05:46:38:31)&nbsp;</option>
+                                                                            <option value='10285963'>&nbsp;-L19- 1 - (L19:79:13:41)&nbsp;</option>
+                                                                            <option value='10285966'>&nbsp;-L19- 2 - (L19:58:45:31)&nbsp;</option>
+                                                                            <option value='10285968'>&nbsp;-L19- 3 - (L19:57:55:32)&nbsp;</option>
+                                                                            <option value='10285970'>&nbsp;-L19- 4 - (L19:56:36:23)&nbsp;</option>
+                                                                            <option value='10285971'>&nbsp;-L19- 5 - (L19:45:54:41)&nbsp;</option>
+                                                                            <option value='10286169'>&nbsp;UNSC Fleet 4135 - *(L22:27:90:20)&nbsp;</option>
+                                                                            <option value='10286293'>&nbsp;-Å- 4144 - *Proximus Ceti&nbsp;</option>
+                                                                            <option value='10286294'>&nbsp;-Å- 4145 - *Sol Prime&nbsp;</option>
+                                                                            <option value='10286295'>&nbsp;-Å- 4146 - *Alpha Centauri&nbsp;</option>
+                                                                            <option value='10286375' selected='selected'>&nbsp;-Å- 4147 - *(L22:27:90:20)&nbsp;</option>
+                                                                        </select>
+                                                                    </form>
+                                                                </th>
+                                                                <th width='20%'>Origin</th>
+                                                                <th width='20%'>Destination</th>
+                                                                <th width='20%'>Arrival</th>
+                                                                <th width='20%'>Comment</th>
+                                                            </tr>
+                                                            <tr align='center'>
+                                                                <td>
+                                                                    <table id='local-header_fleet-buttons' class='menu'>
+                                                                        <tr class='row1'>
+                                                                            <td class='menu-item'>
+                                                                                <table onmouseover='buttonOver(this, "button small-button small-button-normal-over")' onmouseout='buttonOut(this)' class='button small-button small-button-normal'>
+                                                                                    <tr>
+                                                                                        <td class='button-left'><a href='fleet.aspx?fleet=10286375&action=rename'>&nbsp;</a></td>
+                                                                                        <td class='button-center'><a href='fleet.aspx?fleet=10286375&action=rename'>Rename</a></td>
+                                                                                        <td class='button-right'><a href='fleet.aspx?fleet=10286375&action=rename'>&nbsp;</a></td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                            <td class='menu-separator'>
+                                                                                <div>&nbsp;</div>
+                                                                            </td>
+                                                                            <td class='menu-item'>
+                                                                                <table onmouseover='buttonOver(this, "button small-button small-button-normal-over")' onmouseout='buttonOut(this)' class='button small-button small-button-normal'>
+                                                                                    <tr>
+                                                                                        <td class='button-left'><a href='fleet.aspx?fleet=10286375&view=disband'>&nbsp;</a></td>
+                                                                                        <td class='button-center'><a href='fleet.aspx?fleet=10286375&view=disband'>Disband</a></td>
+                                                                                        <td class='button-right'><a href='fleet.aspx?fleet=10286375&view=disband'>&nbsp;</a></td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <a href='map.aspx?loc=L22:27:90:20'> <small>(L22:27:90:20)</small></a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href='map.aspx?loc=L22:27:90:20'> <small>(L22:27:90:20)</small></a>
+                                                                </td>
+                                                                <td><span id='timer1' title='14'></span></td>
+                                                                <td> <small><a href='fleet.aspx?fleet=10286375&action=edit_comment'>Edit</a></small></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class='local-header_box-content-right box-content-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class='local-header_box-footer box-footer'>
+                                        <tr>
+                                            <td class='local-header_box-footer-left box-footer-left'>&nbsp;</td>
+                                            <td class='local-header_box-footer-center box-footer-center'>&nbsp;</td>
+                                            <td class='local-header_box-footer-right box-footer-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <script language=javascript>
+                            timerFormat = 2;
+                            timers();
+                        </script>
+                        <table id='fleet_overview' class='box-complex box box-compact box3'>
+                            <tr>
+                                <td>
+                                    <table class='box3_box-header box-header'>
+                                        <tr>
+                                            <td class='box3_box-header-left box-header-left'>&nbsp;</td>
+                                            <td class='box3_box-header-center box-header-center'>
+                                                <div class='box3_box-title-wrapper box-title-wrapper'>
+                                                    <div class='box3_box-title-container box-title-container'>
+                                                        <table class='box3_box-title box-title'>
+                                                            <tr>
+                                                                <td class='box3_box-title-left box-title-left'>&nbsp;</td>
+                                                                <td class='box3_box-title-center box-title-center'>Overview</td>
+                                                                <td class='box3_box-title-right box-title-right'>&nbsp;</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class='box3_box-header-right box-header-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class='box3_box-content box-content'>
+                                        <tr>
+                                            <td class='box3_box-content-left box-content-left'>&nbsp;</td>
+                                            <td class='box3_box-content-center box-content-center'>
+                                                <div class='box3_content'>
+                                                    <div class='box3_box-title-pad box-title-pad'>&nbsp;</div>
+                                                    <table class='layout listing btnlisting tbllisting1'>
+                                                        <tr class='listing-header'>
+                                                            <th width='140'></th>
+                                                            <th width='60'>Units</th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Fighters</b></td>
+                                                            <td align='center'>200</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Frigate</b></td>
+                                                            <td align='center'>50</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </table>
+                                                    <br />
+                                                    <center>Fleet Size: 5,000</center>
+                                                </div>
+                                            </td>
+                                            <td class='box3_box-content-right box-content-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class='box3_box-footer box-footer'>
+                                        <tr>
+                                            <td class='box3_box-footer-left box-footer-left'>&nbsp;</td>
+                                            <td class='box3_box-footer-center box-footer-center'>&nbsp;</td>
+                                            <td class='box3_box-footer-right box-footer-right'>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <center><b>Travel Duration: 14s</b></center>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -93,7 +93,8 @@
     },
     {
       "matches": [
-        "http://*.astroempires.com/fleet.aspx?fleet=*"
+        "http://*.astroempires.com/fleet.aspx?fleet=*",
+        "*/AE_Addon/tests/fleet_overview/*"
       ],
       "exclude_matches": [
         "http://*.astroempires.com/fleet.aspx?fleet=*&view=*"

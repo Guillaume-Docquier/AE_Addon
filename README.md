@@ -22,20 +22,20 @@ Because I believe in freedom and because not everyone might want all of these (a
 </p>
 
 # Expected functionalities
-Choose to be notified when  
-* Building queued, building finished
-* Research queued/finished
-* Ship construction finished
+Being able to choose to be notified when  
+* A building is queued or has finished
+* A research is queued or has finished
+* A ship construction has finished
 
-Fleet launch programming    
-Integrated battle calc  
-Automated tech checking
+Program fleet launch in the future    
+Integrated battle calculator  
+Automated technology checking and saving
 
-# Implemented functionalities  
-You will find an AE_Addon settings section in the display settings that allows you to enable/disable any functionality.  
-You can now see the expected arrival time (server/local time) before launching your fleet. _Requires animated server time_  
-You can now choose to be notified before a fleet lands when moving/recalling it.  
-Message and board post number are now automatically updated every minute across all tabs and whenever you view them.  
+# All features  
+AE_Addon settings section in the display settings that allows you to enable/disable any functionality.  
+See the expected arrival time (server/local time) before launching your fleet. _Requires animated server time_  
+Choose to be notified before a fleet lands when moving/recalling it.  
+Message and board post number automatically update every minute across all tabs and whenever you view them.  
 
 ### Version history (Current version: v0.5.4)  
 v0.5.2

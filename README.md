@@ -17,7 +17,7 @@ Have you ever forgot that you sent a fleet and it got destroyed by your ennemies
 ## Use only what you want  
 Because I believe in freedom and because not everyone might want all of these (awesome) features, you can choose which ones you want to use. Whenever you want, simply checkout the AE_Addon setting at the bottom of the display settings page. There, you can tick whatever feature you'd like to have.  
   
-<img src="https://github.com/Guillaume-Docquier/AE_Addon/blob/master/screens/After_DisplaySettings.png"></img>
+<img src="https://github.com/Guillaume-Docquier/AE_Addon/blob/master/screens/Split_DisplaySettings.png"></img>
 
 # Expected functionalities
 Choose to be notified when  

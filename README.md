@@ -9,7 +9,7 @@ If you happen to have ideas in mind, feel free to propose them!
 # Key features  
 
 ## Improved UI  
-AE's UI is good but is flawed in many places. I decided to correct these flaws where I could or improve the existing design in some places. For example, the fleet overview is very simple and feels a bit too basic. I added already existing styles to make it feel a lot more polished. The result is a better look and a hover effect on the ship rows so that reading those big crunchy numbers becomes easier.  
+AE's User Interface is good but is flawed in many places. I decided to correct these flaws where I could or improve the existing design in some places. For example, the fleet overview is very simple and feels a bit too basic. I added already existing styles to make it feel a lot more polished. The result is a better look and a hover effect on the ship rows so that reading those big crunchy numbers becomes easier.  
   
 <img src="https://github.com/Guillaume-Docquier/AE_Addon/blob/master/screens/After_FleetOverview.png"></img>
 

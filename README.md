@@ -2,8 +2,8 @@
 This is a chrome extension for Astroempires that adds functionalities to the game. Modularity will be a key aspect for the addon. By that I mean that the user should always be able to choose which functionalities he wants to use and disable anything else. Below you will find a list of the expected functionalities. These are the ideas I currently have in mind. Please note that they might not all be implemented in the future. You can however find the list of the currently implemented functionalities as well as the version history.  
 If you happen to have ideas in mind, feel free to propose them!  
 
-> Astro Empires (AE) is an Internet Browser game opened in May 2006. The game has attracted over 35,000 players since it first opened  >and has recently started play on its sixteenth server, known as Pegasus.  
->The game takes place in one universe spanning dozens of galaxies, thousands of systems and tens of thousands of worlds in which >players can build up their own Astro Empire of the stars.  
+> Astro Empires (AE) is an Internet Browser game opened in May 2006. The game has attracted over 35,000 players since it first opened and has recently started play on its sixteenth server, known as Pegasus.  
+>The game takes place in one universe spanning dozens of galaxies, thousands of systems and tens of thousands of worlds in which players can build up their own Astro Empire of the stars.  
 >\- Taken from the [Astroempires Wikia](http://astroempires.wikia.com/wiki/What_is_Astro_Empires)
 
 # Key features  
